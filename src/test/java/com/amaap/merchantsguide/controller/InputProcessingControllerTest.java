@@ -5,6 +5,7 @@ import com.amaap.merchantsguide.controller.dto.Response;
 import com.amaap.merchantsguide.repository.FileRepository;
 import com.amaap.merchantsguide.service.FileProcessingService;
 import com.amaap.merchantsguide.service.GalacticTransactionService;
+import com.amaap.merchantsguide.service.exception.InvalidFilePathNotExist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ import java.io.IOException;
 public class InputProcessingControllerTest {
 
     @Test
-    void shouldBeAbleToReadInputFile() throws IOException {
+    void shouldBeAbleToReadInputFile() throws IOException, InvalidFilePathNotExist {
         // arrange
         InputProcessingController inputController = new InputProcessingController(new FileProcessingService(new FileRepository(), new GalacticTransactionService()));
         Response expectedResponse = new Response(HttpStatus.OK, "File has been processed successfully!");

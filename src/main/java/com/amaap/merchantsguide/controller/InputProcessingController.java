@@ -3,6 +3,7 @@ package com.amaap.merchantsguide.controller;
 import com.amaap.merchantsguide.controller.dto.HttpStatus;
 import com.amaap.merchantsguide.controller.dto.Response;
 import com.amaap.merchantsguide.service.FileProcessingService;
+import com.amaap.merchantsguide.service.exception.InvalidFilePathNotExist;
 
 import java.io.IOException;
 
@@ -13,7 +14,7 @@ public class InputProcessingController {
         this.fileProcessingService = fileProcessingService;
     }
 
-    public Response readInputFile(String filePath) throws IOException {
+    public Response readInputFile(String filePath) throws IOException, InvalidFilePathNotExist {
         fileProcessingService.processInputFile(filePath);
         return new Response(HttpStatus.OK, "File has been processed successfully!");
     }

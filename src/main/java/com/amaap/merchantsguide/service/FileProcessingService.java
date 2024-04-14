@@ -3,6 +3,8 @@ package com.amaap.merchantsguide.service;
 import com.amaap.merchantsguide.repository.FileRepository;
 import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
 import com.amaap.merchantsguide.service.dto.GalacticTokenDto;
+import com.amaap.merchantsguide.service.exception.InvalidFilePathNotExist;
+import com.amaap.merchantsguide.service.validator.FilePathValidator;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,8 +19,9 @@ public class FileProcessingService {
         this.galacticTransactionService = galacticTransactionService;
     }
 
-    public boolean processInputFile(String filePath) throws IOException {
+    public boolean processInputFile(String filePath) throws IOException, InvalidFilePathNotExist {
 
+        if(FilePathValidator.validateFilePath(filePath)) throw new InvalidFilePathNotExist("File path not valid");
         BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
         String line;
         while ((line = bufferedReader.readLine()) != null) {
@@ -27,7 +30,7 @@ public class FileProcessingService {
         return true;
     }
 
-    private boolean parseInputLine(String line) {
+     boolean parseInputLine(String line) {
 
         if (line.matches("^\\w+\\s+is\\s+\\w+$")) {
             foundGalacticUnit(line);
@@ -48,8 +51,6 @@ public class FileProcessingService {
         } else {
             GalacticQueryDto query = new GalacticQueryDto(line);
             fileRepository.save(query);
-
-
         }
     }
 
