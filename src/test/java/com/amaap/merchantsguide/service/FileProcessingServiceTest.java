@@ -3,6 +3,7 @@ package com.amaap.merchantsguide.service;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
 import com.amaap.merchantsguide.repository.impl.FileRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InvalidFilePathNotExist;
+import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ class FileProcessingServiceTest {
             new GalacticTransactionService());
 
     @Test
-    void shouldBeAbleToProcessInputFile() throws IOException, InvalidFilePathNotExist {
+    void shouldBeAbleToProcessInputFile() throws IOException, InvalidFilePathNotExist, InvalidParameterTypeException {
         // act
         boolean result = fileProcessingService.processInputFile("D:\\Tasks\\Merchant-Guide\\src\\test\\java\\com\\amaap\\merchantsguide\\resources\\GalacticTransactions.txt");
 

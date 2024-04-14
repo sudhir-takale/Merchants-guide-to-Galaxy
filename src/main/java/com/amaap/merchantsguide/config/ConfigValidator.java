@@ -23,9 +23,9 @@ public class ConfigValidator {
      transaction.put(2,"glob prok");
      transaction.put(3,"pish pish");
 
-     metals.put(1,"silver");
-     metals.put(2, "gold");
-     metals.put(3, "iron");
+     metals.put(1,"Silver");
+     metals.put(2, "Gold");
+     metals.put(3, "Iron");
 
     }
 

@@ -8,6 +8,8 @@ import com.amaap.merchantsguide.repository.impl.FileRepositoryImpl;
 import com.amaap.merchantsguide.service.FileProcessingService;
 import com.amaap.merchantsguide.service.GalacticTransactionService;
 import com.amaap.merchantsguide.service.exception.InvalidFilePathNotExist;
+import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
+import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +19,7 @@ import java.io.IOException;
 public class InputProcessingControllerTest {
 
     @Test
-    void shouldBeAbleToReadInputFile() throws IOException, InvalidFilePathNotExist {
+    void shouldBeAbleToReadInputFile() throws IOException, InvalidFilePathNotExist, InvalidParameterTypeException {
         // arrange
         InputProcessingController inputController =
                 new InputProcessingController(new FileProcessingService(new FileRepositoryImpl(new InMemoryDatabaseImpl()),
