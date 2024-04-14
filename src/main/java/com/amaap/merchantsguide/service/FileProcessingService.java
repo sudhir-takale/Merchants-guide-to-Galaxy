@@ -66,7 +66,7 @@ public class FileProcessingService {
         String unit = transactionToken[0] + " " + transactionToken[1];
         if (!transaction.containsValue(unit.trim()))
             throw new InvalidGalacticTransactionFound(unit + " Invalid galactic transaction found");
-        if (!metals.containsValue(transactionToken[2]))
+        if (!metals.containsValue(transactionToken[2]) || Integer.parseInt(transactionToken[4]) < 0)
             throw new InValidMetalFoundException(transactionToken[2] + " Invalid metal type found");
         else {
             galacticTransactionService.createTransaction(unit, transactionToken[2], Integer.parseInt(transactionToken[4]));

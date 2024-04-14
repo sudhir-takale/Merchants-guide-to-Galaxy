@@ -54,6 +54,8 @@ class FileProcessingServiceTest {
         String line = "pish is H";
         // act & assert
         Assertions.assertThrows(InvalidParameterTypeException.class, () -> fileProcessingService.parseInputLine(line));
+        Assertions.assertThrows(InvalidParameterTypeException.class, () -> fileProcessingService.parseInputLine("pish" +
+                " pish Platinum is -3910 Credits"));
     }
 
 
