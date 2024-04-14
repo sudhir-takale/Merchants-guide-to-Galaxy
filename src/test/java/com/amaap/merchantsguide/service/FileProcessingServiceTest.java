@@ -2,6 +2,7 @@ package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
 import com.amaap.merchantsguide.repository.impl.FileRepositoryImpl;
+import com.amaap.merchantsguide.repository.impl.GalacticTransactionRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
 import com.amaap.merchantsguide.service.exception.InvalidFilePathNotExist;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionUnitException;
@@ -14,7 +15,9 @@ import java.io.IOException;
 
 class FileProcessingServiceTest {
 
-    FileProcessingService fileProcessingService = new FileProcessingService(new FileRepositoryImpl(new InMemoryDatabaseImpl()), new GalacticTransactionService());
+    FileProcessingService fileProcessingService =
+            new FileProcessingService(new FileRepositoryImpl(new InMemoryDatabaseImpl()),
+                    new GalacticTransactionService(new GalacticTransactionRepositoryImpl()));
 
     @Test
     void shouldBeAbleToProcessInputFile() throws IOException, InvalidFilePathNotExist, InvalidParameterTypeException {

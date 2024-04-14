@@ -5,6 +5,7 @@ import com.amaap.merchantsguide.controller.dto.Response;
 import com.amaap.merchantsguide.repository.FileRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
 import com.amaap.merchantsguide.repository.impl.FileRepositoryImpl;
+import com.amaap.merchantsguide.repository.impl.GalacticTransactionRepositoryImpl;
 import com.amaap.merchantsguide.service.FileProcessingService;
 import com.amaap.merchantsguide.service.GalacticTransactionService;
 import com.amaap.merchantsguide.service.exception.InvalidFilePathNotExist;
@@ -23,7 +24,7 @@ public class InputProcessingControllerTest {
         // arrange
         InputProcessingController inputController =
                 new InputProcessingController(new FileProcessingService(new FileRepositoryImpl(new InMemoryDatabaseImpl()),
-                        new GalacticTransactionService()));
+                        new GalacticTransactionService(new GalacticTransactionRepositoryImpl())));
         Response expectedResponse = new Response(HttpStatus.OK, "File has been processed successfully!");
 
         // act
