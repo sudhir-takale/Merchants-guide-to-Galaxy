@@ -1,7 +1,7 @@
 package com.amaap.merchantsguide.service;
 
-import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
 import com.amaap.merchantsguide.repository.FileRepository;
+import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
 import com.amaap.merchantsguide.service.dto.GalacticTokenDto;
 
 import java.io.BufferedReader;
@@ -22,30 +22,51 @@ public class FileProcessingService {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            parseInputLine(line);
+            if (!parseInputLine(line)) return false;
         }
         return true;
     }
 
-    private void parseInputLine(String line) {
+    private boolean parseInputLine(String line) {
+        if (line.contains("is") && line.length() == 3) {
+            foundGalacticUnit(line);
+        } else if (line.contains("credits")) {
+            foundGalacticTransaction(line);
 
-        if (line.length() == 3) {
-            if (line.contains("is")) {
-                String[] parts = line.split("is");
-                GalacticTokenDto token = new GalacticTokenDto(parts[0],parts[1].charAt(0));
-            }
-        } else if (line.contains("is")) {
-            String[] transactionToken = line.split(" ");
-            String unit = transactionToken[0] + transactionToken[1];
-            GalacticTransaction galacticTransaction = new GalacticTransaction(unit, transactionToken[2], transactionToken[4]);
-        } else if ((line.contains("How much") || line.contains("How many"))) {
-            if (line.contains("is")) {
-                String[] transactionToken = line.split("is");
-                GalacticQuery query = newGalacticQuery(transactionToken[1]);
-            } else {
-                GalacticQuery query = newGalacticQuery(line);
-            }
+        } else if ((line.contains("?") || line.contains("How many"))) {
+            foundGalacticQuery(line);
         }
+        return true;
+    }
 
+    private void foundGalacticQuery(String line) {
+        if (line.contains("is")) {
+            String[] transactionToken = line.split("is");
+            GalacticQueryDto query = new GalacticQueryDto(transactionToken[1]);
+            fileRepository.save(query);
+        } else {
+            GalacticQueryDto query = new GalacticQueryDto(line);
+            fileRepository.save(query);
+
+        }
+    }
+
+    private void foundGalacticTransaction(String line) {
+        String[] transactionToken = line.split(" ");
+        for (String token : transactionToken) {
+            System.out.print(token + "  ");
+        }
+        System.out.println(transactionToken.length);
+        String unit = transactionToken[0] + transactionToken[3];
+        System.out.println("Unit is " + unit);
+        System.out.println("credit is" + transactionToken[4]);
+        galacticTransactionService.createTransaction(unit, transactionToken[2], Integer.parseInt(transactionToken[4]));
+
+    }
+
+    private void foundGalacticUnit(String line) {
+        String[] parts = line.split("is");
+        GalacticTokenDto token = new GalacticTokenDto(parts[0], parts[1].charAt(0));
+        fileRepository.saveTranslation(token);
     }
 }
