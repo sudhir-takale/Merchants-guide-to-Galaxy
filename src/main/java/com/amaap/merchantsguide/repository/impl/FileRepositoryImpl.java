@@ -32,4 +32,9 @@ public class FileRepositoryImpl implements FileRepository {
         return inMemoryDatabase.getQueryList();
     }
 
+    @Override
+    public List<GalacticTokenDto> getAllTranslations() {
+        return inMemoryDatabase.getAllTranslations();
+    }
+
 }

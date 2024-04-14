@@ -27,5 +27,10 @@ public class InMemoryDatabaseImpl implements InMemoryDatabase {
         return this.galaxyQueryList;
     }
 
+    @Override
+    public List<GalacticTokenDto> getAllTranslations() {
+        return this.galaxyTranslationList;
+    }
+
 
 }

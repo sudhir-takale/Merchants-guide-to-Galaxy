@@ -13,4 +13,6 @@ public interface InMemoryDatabase {
      void insert(GalacticQueryDto query);
 
      List<GalacticQueryDto> getQueryList();
+
+     List<GalacticTokenDto> getAllTranslations();
 }

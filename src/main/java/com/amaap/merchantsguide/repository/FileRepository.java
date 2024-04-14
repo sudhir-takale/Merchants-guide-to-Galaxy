@@ -12,4 +12,6 @@ public interface FileRepository {
      boolean saveTranslation(GalacticTokenDto token);
 
      List<GalacticQueryDto> getQueryList();
+
+     List<GalacticTokenDto> getAllTranslations();
 }

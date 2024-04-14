@@ -26,7 +26,25 @@ class FileRepositoryImplTest {
 
     }
 
- @Test
+    @Test
+    void shouldBeAbleToGetTheGalacticUnitsList() {
+        // arrange
+        GalacticTokenDto galacticTokenDto = new GalacticTokenDto("glob", 'I');
+        GalacticTokenDto galacticTokenDto1 = new GalacticTokenDto("glob", 'I');
+        GalacticTokenDto galacticTokenDto2 = new GalacticTokenDto("prok", 'M');
+        fileRepository.saveTranslation(galacticTokenDto);
+        fileRepository.saveTranslation(galacticTokenDto1);
+        fileRepository.saveTranslation(galacticTokenDto2);
+
+        // act
+        List<GalacticTokenDto> units = fileRepository.getAllTranslations();
+
+        // assert
+        Assertions.assertEquals(3, units.size());
+
+    }
+
+    @Test
     void shouldBeAbleToSaveTheGalacticQueries() {
         // arrange
         GalacticQueryDto galacticTokenDto = new GalacticQueryDto("glob glob prok");
