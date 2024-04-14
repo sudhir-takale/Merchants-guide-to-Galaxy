@@ -28,9 +28,10 @@ public class FileProcessingService {
     }
 
     private boolean parseInputLine(String line) {
-        if (line.contains("is") && line.length() == 3) {
+
+        if (line.matches("^\\w+\\s+is\\s+\\w+$")) {
             foundGalacticUnit(line);
-        } else if (line.contains("credits")) {
+        } else if (line.contains("Credits")) {
             foundGalacticTransaction(line);
 
         } else if ((line.contains("?") || line.contains("How many"))) {
@@ -48,24 +49,20 @@ public class FileProcessingService {
             GalacticQueryDto query = new GalacticQueryDto(line);
             fileRepository.save(query);
 
+
         }
     }
 
     private void foundGalacticTransaction(String line) {
         String[] transactionToken = line.split(" ");
-        for (String token : transactionToken) {
-            System.out.print(token + "  ");
-        }
-        System.out.println(transactionToken.length);
-        String unit = transactionToken[0] + transactionToken[3];
-        System.out.println("Unit is " + unit);
-        System.out.println("credit is" + transactionToken[4]);
+        String unit = transactionToken[0] + " " + transactionToken[1];
         galacticTransactionService.createTransaction(unit, transactionToken[2], Integer.parseInt(transactionToken[4]));
 
     }
 
     private void foundGalacticUnit(String line) {
         String[] parts = line.split("is");
+        String part = parts[1];
         GalacticTokenDto token = new GalacticTokenDto(parts[0], parts[1].charAt(0));
         fileRepository.saveTranslation(token);
     }
