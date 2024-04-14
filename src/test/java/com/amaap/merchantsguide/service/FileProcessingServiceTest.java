@@ -1,17 +1,18 @@
 package com.amaap.merchantsguide.service;
 
-import com.amaap.merchantsguide.repository.FileRepository;
+import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
+import com.amaap.merchantsguide.repository.impl.FileRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InvalidFilePathNotExist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.mockito.Mockito.when;
 
 class FileProcessingServiceTest {
 
-    FileProcessingService fileProcessingService = new FileProcessingService(new FileRepository(), new GalacticTransactionService());
+    FileProcessingService fileProcessingService = new FileProcessingService(new FileRepositoryImpl(new InMemoryDatabaseImpl()),
+            new GalacticTransactionService());
 
     @Test
     void shouldBeAbleToProcessInputFile() throws IOException, InvalidFilePathNotExist {

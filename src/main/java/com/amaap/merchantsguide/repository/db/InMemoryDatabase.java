@@ -1,15 +1,16 @@
-package com.amaap.merchantsguide.repository;
+package com.amaap.merchantsguide.repository.db;
 
 import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
 import com.amaap.merchantsguide.service.dto.GalacticTokenDto;
 
 import java.util.List;
 
-public interface FileRepository {
+public interface InMemoryDatabase {
 
-     boolean save(GalacticQueryDto query);
+     void save(GalacticTokenDto token);
 
-     boolean saveTranslation(GalacticTokenDto token);
+
+     void insert(GalacticQueryDto query);
 
      List<GalacticQueryDto> getQueryList();
 }
