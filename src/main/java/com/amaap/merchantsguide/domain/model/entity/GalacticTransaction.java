@@ -20,4 +20,17 @@ public class GalacticTransaction {
     public int getCredit() {
         return credit;
     }
+
+    public String getMetal() {
+        return metal;
+    }
+
+    public int getTransactionId() {
+        return transactionId;
+    }
+
+    public String getTransactionName() {
+        return transactionName;
+    }
 }
+

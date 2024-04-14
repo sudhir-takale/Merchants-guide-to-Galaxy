@@ -16,4 +16,6 @@ public class GalacticTokenDto {
     public char getRomanNumeral() {
         return romanNumeral;
     }
+
+
 }
