@@ -48,6 +48,7 @@ I have no idea what you are talking about<br>
 ------------------------------------------------------------------------
 Solution:
 
+
 - Domain 
     - Model 
       - GalacticTransactions 
@@ -58,22 +59,31 @@ Solution:
       - RomanTranslation(enum)
     
     - Service
-      - processTransactions 
-      
+      - processTransactions
+        <br>
+        <br>
+- co
+- nfiguration
+  - numerals 
+  - transactions
+<br>
+<br>
 - Controllers
     - FileProcessingController
         - processInputFile
     - GalacticController
         - processTransactions 
         - showTransactions
-
+          <br>
+          <br>
 - Services
     - FileProcessingService
     - GalacticService
           - crateTransaction
           - ProcessTransaction
           - getTransactions
-
+      <br>
+      <br>
 - Repository
     - FileRepository
         - GalacticTransactionDTO
