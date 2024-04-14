@@ -15,4 +15,9 @@ public class GalacticTransactionController {
         this.galacticTransactionService.fetchTransactions();
         return new Response(HttpStatus.OK, "Transactions has been fetched successfully");
     }
+
+    public Response processQueries() {
+        this.galacticTransactionService.resolveQueries();
+        return new Response(HttpStatus.OK, "All queries resolved successfully");
+    }
 }

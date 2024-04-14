@@ -26,4 +26,16 @@ public class GalacticTransactionControllerTest {
     }
 
 
+    @Test
+    void shouldBeAbleToResolveQueries() {
+        Response expected = new Response(HttpStatus.OK, "All queries resolved successfully");
+
+        // act
+        Response actual = galacticTransactionController.processQueries();
+
+        // assert
+        Assertions.assertEquals(expected, actual);
+    }
+
+
 }
