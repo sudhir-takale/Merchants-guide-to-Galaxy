@@ -17,7 +17,7 @@ class FileProcessingServiceTest {
 
     FileProcessingService fileProcessingService =
             new FileProcessingService(new FileRepositoryImpl(new InMemoryDatabaseImpl()),
-                    new GalacticTransactionService(new GalacticTransactionRepositoryImpl()));
+                    new GalacticTransactionService(new GalacticTransactionRepositoryImpl(new InMemoryDatabaseImpl())));
 
     @Test
     void shouldBeAbleToProcessInputFile() throws IOException, InvalidFilePathNotExist, InvalidParameterTypeException {

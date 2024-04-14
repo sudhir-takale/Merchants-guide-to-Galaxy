@@ -1,5 +1,6 @@
 package com.amaap.merchantsguide.repository.db;
 
+import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
 import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
 import com.amaap.merchantsguide.service.dto.GalacticTokenDto;
 
@@ -11,6 +12,7 @@ public class InMemoryDatabaseImpl implements InMemoryDatabase {
 
     private List<GalacticTokenDto> galaxyTranslationList = new ArrayList<>();
     private List<GalacticQueryDto> galaxyQueryList = new ArrayList<>();
+    private List<GalacticTransaction> transactionList = new ArrayList<>();
 
     @Override
     public void save(GalacticTokenDto token) {
@@ -30,6 +32,16 @@ public class InMemoryDatabaseImpl implements InMemoryDatabase {
     @Override
     public List<GalacticTokenDto> getAllTranslations() {
         return this.galaxyTranslationList;
+    }
+
+    @Override
+    public List<GalacticTransaction> getTransactions() {
+        return this.transactionList;
+    }
+
+    @Override
+    public void addTransaction(GalacticTransaction galacticTransaction) {
+        this.transactionList.add(galacticTransaction);
     }
 
 

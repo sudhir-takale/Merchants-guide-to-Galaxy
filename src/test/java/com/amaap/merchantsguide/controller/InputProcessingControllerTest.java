@@ -24,7 +24,7 @@ public class InputProcessingControllerTest {
         // arrange
         InputProcessingController inputController =
                 new InputProcessingController(new FileProcessingService(new FileRepositoryImpl(new InMemoryDatabaseImpl()),
-                        new GalacticTransactionService(new GalacticTransactionRepositoryImpl())));
+                        new GalacticTransactionService(new GalacticTransactionRepositoryImpl(new InMemoryDatabaseImpl()))));
         Response expectedResponse = new Response(HttpStatus.OK, "File has been processed successfully!");
 
         // act

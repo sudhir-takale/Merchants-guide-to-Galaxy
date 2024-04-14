@@ -1,6 +1,7 @@
 package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
+import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
 import com.amaap.merchantsguide.repository.impl.GalacticTransactionRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 class GalacticTransactionServiceTest {
-    GalacticTransactionService galacticTransactionService = new GalacticTransactionService(new GalacticTransactionRepositoryImpl());
+    GalacticTransactionService galacticTransactionService =
+            new GalacticTransactionService(new GalacticTransactionRepositoryImpl(new InMemoryDatabaseImpl()));
 
 
     @Test
