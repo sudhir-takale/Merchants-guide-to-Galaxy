@@ -10,6 +10,9 @@ public class GalacticTranslationControllerTest {
     GalacticTranslationController galacticTranslationController =
             new GalacticTranslationController(new GalacticTranslationService(new GalacticTranslationRepository(new InMemoryDatabaseImpl())));
 
+
+
+
     @Test
     void shouldBeAbleToCreateANewGalaxyTranslation() {
         // act
@@ -18,6 +21,7 @@ public class GalacticTranslationControllerTest {
         Assertions.assertTrue(result);
 
     }
+
 
 
 }

@@ -7,13 +7,13 @@ class QueryProcessorTest {
 
     @Test
     void shouldGetCorrectConversionFromRomanToNumber() {
-        // arrange
-        QueryProcessor queryProcessor = new QueryProcessor();
         //act
-        int result = queryProcessor.convertToNumber("IXXV");
+        int result = QueryProcessor.convertToNumber("IXXV");
 
         // assert
         Assertions.assertEquals(24, result);
     }
+
+
 
 }

@@ -7,7 +7,6 @@ public class QueryProcessor {
 
 
     public static int convertToNumber(String romanNumeral) {
-
         int result = 0;
         int prevValue = 0;
 

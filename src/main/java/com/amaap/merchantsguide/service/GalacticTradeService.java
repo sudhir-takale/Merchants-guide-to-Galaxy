@@ -42,8 +42,6 @@ public class GalacticTradeService {
     private String getNumeralValue(String[] metal) {
         StringBuilder builder = new StringBuilder();
         List<GalacticTranslation> token = getTranslations();
-//        System.out.println("printing tokens");
-//        token.forEach(System.out::println);
 
         for (String unit : metal) {
             boolean found = false;
@@ -81,6 +79,7 @@ public class GalacticTradeService {
                 QueryProcessor.processInvalidQuery(dto.getQuery());
 
             } else if (unit.length == 3) {
+
                 String[] newArray = {unit[0].trim(), unit[1].trim()};
                 String romanValue = getNumeralValue(newArray);
                 double credits = getCredits(unit[2]);
