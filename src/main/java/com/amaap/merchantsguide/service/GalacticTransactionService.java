@@ -4,7 +4,7 @@ import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
 import com.amaap.merchantsguide.domain.service.QueryProcessor;
 import com.amaap.merchantsguide.repository.GalacticTransactionRepository;
 import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTokenDto;
+import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
 import com.amaap.merchantsguide.service.validator.TransactionValidator;
 
@@ -13,6 +13,7 @@ import java.util.List;
 
 public class GalacticTransactionService {
     private final GalacticTransactionRepository transactionRepository;
+    QueryProcessor queryProcessor = new QueryProcessor();
 
     public GalacticTransactionService(GalacticTransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
@@ -35,7 +36,7 @@ public class GalacticTransactionService {
         return this.transactionRepository.getAllQueries();
     }
 
-    public List<GalacticTokenDto> getTranslationDto() {
+    public List<GalacticTranslationDto> getTranslationDto() {
         return this.transactionRepository.getTranslationDto();
     }
 
@@ -51,40 +52,58 @@ public class GalacticTransactionService {
     public void resolveQueries() {
 
         List<GalacticQueryDto> queries = getAllQueries();
-        for (int i = 0; i < queries.size(); i++) {
+        for (GalacticQueryDto query : queries) {
 
-            String line = queries.get(i).toString();
+            String line = query.getQuery();
+
             String[] metal = line.split(" ");
 
             if (checkForPlainUnits(metal)) {
                 String numeral = getNumeralValue(metal);
-                QueryProcessor queryProcessor = new QueryProcessor();
                 queryProcessor.processQueries(numeral, line);
             } else if (checkForMetal(metal)) {
-                    getNumeralValueWithMetal(metal);
+                int onePartValue = getNumeralValueWithMetal(metal[2]);
+                String[] unitValue = {metal[0], metal[1]};
+                String numeral = getNumeralValue(unitValue);
+                queryProcessor.processWithMetal(numeral, onePartValue, line);
+            } else {
+                queryProcessor.processKnownQuery(line);
             }
 
-            String dirt = metal[2];
         }
     }
 
-    private void getNumeralValueWithMetal(String[] metal) {
+    private int getNumeralValueWithMetal(String metal) {
+        String unit = "";
+        int credit = 0;
 
+        List<GalacticTransaction> transactionList = fetchTransactions();
+        for (GalacticTransaction transaction : transactionList) {
+            if (transaction.getMetal().equalsIgnoreCase(metal)) {
+                unit = transaction.getTransactionName();
+                credit = transaction.getCredit();
+            }
+        }
+        String[] unitMetal = unit.split(" ");
+        String romanNumeral = getNumeralValue(unitMetal);
+        int number = queryProcessor.convertToNumber(romanNumeral);
+        int onePartValue = credit / number;
+        return onePartValue;
     }
 
     private boolean checkForMetal(String[] metal) {
 
         List<String> metalList = getMetals();
-        return metalList.contains(metal[2]);
+        return metalList.contains(metal[1]);
     }
 
     private String getNumeralValue(String[] metal) {
         StringBuilder builder = new StringBuilder();
-        List<GalacticTokenDto> token = getTranslationDto();
+        List<GalacticTranslationDto> token = getTranslationDto();
 
         for (String unit : metal) {
             boolean found = false;
-            for (GalacticTokenDto dto : token) {
+            for (GalacticTranslationDto dto : token) {
                 if (dto.getGalacticUnit().equals(unit)) {
                     builder.append(dto.getRomanNumeral());
                     found = true;
@@ -97,11 +116,11 @@ public class GalacticTransactionService {
 
     private boolean checkForPlainUnits(String[] metal) {
 
-        List<GalacticTokenDto> token = getTranslationDto();
+        List<GalacticTranslationDto> token = getTranslationDto();
 
         for (String unit : metal) {
             boolean found = false;
-            for (GalacticTokenDto dto : token) {
+            for (GalacticTranslationDto dto : token) {
                 if (dto.getGalacticUnit().equals(unit)) {
                     found = true;
                     break;
@@ -117,4 +136,4 @@ public class GalacticTransactionService {
 }
 
 
-}
+

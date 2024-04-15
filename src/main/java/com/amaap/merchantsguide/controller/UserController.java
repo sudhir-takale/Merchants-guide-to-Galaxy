@@ -21,7 +21,7 @@ public class UserController {
 
 
     public Response processQueries() {
-        this.userService.processQueries();
+//        this.userService.processQueries();
         return new Response(HttpStatus.OK, "Query processed");
     }
 }

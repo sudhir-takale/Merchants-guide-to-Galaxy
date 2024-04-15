@@ -2,16 +2,32 @@ package com.amaap.merchantsguide.controller;
 
 import com.amaap.merchantsguide.controller.dto.HttpStatus;
 import com.amaap.merchantsguide.controller.dto.Response;
+import com.amaap.merchantsguide.repository.GalacticTransactionRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
+import com.amaap.merchantsguide.repository.impl.FileRepositoryImpl;
 import com.amaap.merchantsguide.repository.impl.GalacticTransactionRepositoryImpl;
+import com.amaap.merchantsguide.service.FileProcessingService;
 import com.amaap.merchantsguide.service.GalacticTransactionService;
+import com.amaap.merchantsguide.service.exception.InvalidFilePathNotExist;
+import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 public class GalacticTransactionControllerTest {
 
-    GalacticTransactionController galacticTransactionController =
-            new GalacticTransactionController(new GalacticTransactionService(new GalacticTransactionRepositoryImpl(new InMemoryDatabaseImpl())));
+    InMemoryDatabaseImpl database = new InMemoryDatabaseImpl();
+    GalacticTransactionRepository repository = new GalacticTransactionRepositoryImpl(database);
+    GalacticTransactionService galacticTransactionService = new GalacticTransactionService(repository);
+
+    GalacticTransactionController galacticTransactionController = new GalacticTransactionController(galacticTransactionService);
+
+
+    FileRepositoryImpl fileRepository = new FileRepositoryImpl(database);
+    FileProcessingService fileProcessingService = new FileProcessingService(fileRepository, galacticTransactionService);
+    InputProcessingController inputProcessingController = new InputProcessingController(fileProcessingService);
+
 
     @Test
     void shouldBeAbleToGetAllNewTransaction() {
@@ -27,8 +43,9 @@ public class GalacticTransactionControllerTest {
 
 
     @Test
-    void shouldBeAbleToResolveQueries() {
+    void shouldBeAbleToResolveQueries() throws InvalidParameterTypeException, InvalidFilePathNotExist, IOException {
         Response expected = new Response(HttpStatus.OK, "All queries resolved successfully");
+        inputProcessingController.readInputFile("D:\\Tasks\\Merchant-Guide\\src\\test\\java\\com\\amaap\\merchantsguide\\resources\\GalacticTransactions.txt");
 
         // act
         Response actual = galacticTransactionController.processQueries();

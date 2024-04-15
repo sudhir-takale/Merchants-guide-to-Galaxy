@@ -1,10 +1,10 @@
 package com.amaap.merchantsguide.service.dto;
 
-public class GalacticTokenDto {
+public class GalacticTranslationDto {
     private String galacticUnit;
     private char romanNumeral;
 
-    public GalacticTokenDto(String galacticUnit, char romanNumeral) {
+    public GalacticTranslationDto(String galacticUnit, char romanNumeral) {
         this.galacticUnit = galacticUnit;
         this.romanNumeral = romanNumeral;
     }

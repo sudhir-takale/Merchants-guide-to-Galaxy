@@ -33,10 +33,6 @@ public class UserService {
         return this.galacticTransactionService.fetchTransactions();
     }
 
-    public void processQueries() {
-        List<GalacticQueryDto> queries = getAllQueries();
-        queryProcessor.processQueries(queries);
-    }
 
 
 }

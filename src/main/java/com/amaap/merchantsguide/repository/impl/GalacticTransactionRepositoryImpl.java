@@ -4,7 +4,7 @@ import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
 import com.amaap.merchantsguide.repository.GalacticTransactionRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTokenDto;
+import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class GalacticTransactionRepositoryImpl implements GalacticTransactionRep
     }
 
     @Override
-    public List<GalacticTokenDto> getTranslationDto() {
+    public List<GalacticTranslationDto> getTranslationDto() {
         return inMemoryDatabase.getAllTranslations();
     }
 }

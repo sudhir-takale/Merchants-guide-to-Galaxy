@@ -3,7 +3,7 @@ package com.amaap.merchantsguide.service;
 import com.amaap.merchantsguide.config.ConfigValidator;
 import com.amaap.merchantsguide.repository.FileRepository;
 import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTokenDto;
+import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
 import com.amaap.merchantsguide.service.exception.*;
 import com.amaap.merchantsguide.service.validator.FilePathValidator;
 
@@ -50,6 +50,8 @@ public class FileProcessingService {
     private void foundGalacticQuery(String line) {
         if (line.contains("is")) {
             String[] transactionToken = line.split("is");
+
+
             GalacticQueryDto query = new GalacticQueryDto(transactionToken[1]);
             fileRepository.save(query);
         } else {
@@ -80,7 +82,7 @@ public class FileProcessingService {
         char numeral = parts[2].charAt(0);
         if (!galacticTranslation.containsKey(unit) || !galacticTranslation.containsValue(numeral))
             throw new InvalidGalacticTransactionUnitException(unit + " Invalid galactic translation found");
-        GalacticTokenDto token = new GalacticTokenDto(unit, numeral);
+        GalacticTranslationDto token = new GalacticTranslationDto(unit, numeral);
         fileRepository.saveTranslation(token);
     }
 }

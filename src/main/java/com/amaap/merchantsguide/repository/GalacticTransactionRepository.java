@@ -2,7 +2,7 @@ package com.amaap.merchantsguide.repository;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
 import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTokenDto;
+import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
 
 import java.util.List;
 
@@ -13,5 +13,5 @@ public interface GalacticTransactionRepository {
 
     List<GalacticQueryDto> getAllQueries();
 
-    List<GalacticTokenDto> getTranslationDto();
+    List<GalacticTranslationDto> getTranslationDto();
 }

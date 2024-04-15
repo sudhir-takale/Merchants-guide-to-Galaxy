@@ -3,7 +3,7 @@ package com.amaap.merchantsguide.repository.impl;
 import com.amaap.merchantsguide.repository.FileRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
 import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTokenDto;
+import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +16,10 @@ class FileRepositoryImplTest {
     @Test
     void shouldBeAbleToSaveTheGalacticUnits() {
         // arrange
-        GalacticTokenDto galacticTokenDto = new GalacticTokenDto("glob", 'I');
+        GalacticTranslationDto galacticTranslationDto = new GalacticTranslationDto("glob", 'I');
 
         // act
-        boolean result = fileRepository.saveTranslation(galacticTokenDto);
+        boolean result = fileRepository.saveTranslation(galacticTranslationDto);
 
         // assert
         Assertions.assertTrue(result);
@@ -29,15 +29,15 @@ class FileRepositoryImplTest {
     @Test
     void shouldBeAbleToGetTheGalacticUnitsList() {
         // arrange
-        GalacticTokenDto galacticTokenDto = new GalacticTokenDto("glob", 'I');
-        GalacticTokenDto galacticTokenDto1 = new GalacticTokenDto("glob", 'I');
-        GalacticTokenDto galacticTokenDto2 = new GalacticTokenDto("prok", 'M');
-        fileRepository.saveTranslation(galacticTokenDto);
-        fileRepository.saveTranslation(galacticTokenDto1);
-        fileRepository.saveTranslation(galacticTokenDto2);
+        GalacticTranslationDto galacticTranslationDto = new GalacticTranslationDto("glob", 'I');
+        GalacticTranslationDto galacticTranslationDto1 = new GalacticTranslationDto("glob", 'I');
+        GalacticTranslationDto galacticTranslationDto2 = new GalacticTranslationDto("prok", 'M');
+        fileRepository.saveTranslation(galacticTranslationDto);
+        fileRepository.saveTranslation(galacticTranslationDto1);
+        fileRepository.saveTranslation(galacticTranslationDto2);
 
         // act
-        List<GalacticTokenDto> units = fileRepository.getAllTranslations();
+        List<GalacticTranslationDto> units = fileRepository.getAllTranslations();
 
         // assert
         Assertions.assertEquals(3, units.size());

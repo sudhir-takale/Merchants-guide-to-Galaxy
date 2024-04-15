@@ -3,7 +3,7 @@ package com.amaap.merchantsguide.repository.db;
 import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
 import com.amaap.merchantsguide.domain.model.entity.User;
 import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTokenDto;
+import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +12,12 @@ public class InMemoryDatabaseImpl implements InMemoryDatabase {
 
     int userId = 0;
     private List<User> users = new ArrayList<>();
-    private List<GalacticTokenDto> galaxyTranslationList = new ArrayList<>();
+    private List<GalacticTranslationDto> galaxyTranslationList = new ArrayList<>();
     private List<GalacticQueryDto> galaxyQueryList = new ArrayList<>();
     private List<GalacticTransaction> transactionList = new ArrayList<>();
 
     @Override
-    public void save(GalacticTokenDto token) {
+    public void save(GalacticTranslationDto token) {
         this.galaxyTranslationList.add(token);
     }
 
@@ -32,7 +32,7 @@ public class InMemoryDatabaseImpl implements InMemoryDatabase {
     }
 
     @Override
-    public List<GalacticTokenDto> getAllTranslations() {
+    public List<GalacticTranslationDto> getAllTranslations() {
         return this.galaxyTranslationList;
     }
 
