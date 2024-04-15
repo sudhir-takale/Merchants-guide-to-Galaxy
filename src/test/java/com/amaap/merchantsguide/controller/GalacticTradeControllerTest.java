@@ -3,10 +3,13 @@ package com.amaap.merchantsguide.controller;
 import com.amaap.merchantsguide.controller.dto.HttpStatus;
 import com.amaap.merchantsguide.controller.dto.Response;
 import com.amaap.merchantsguide.repository.GalacticTradeRepository;
+import com.amaap.merchantsguide.repository.GalacticTranslationRepository;
+import com.amaap.merchantsguide.repository.MetalRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
 import com.amaap.merchantsguide.repository.impl.GalacticTradeRepositoryImpl;
 import com.amaap.merchantsguide.service.GalacticTradeService;
 import com.amaap.merchantsguide.service.GalacticTranslationService;
+import com.amaap.merchantsguide.service.MetalService;
 import com.amaap.merchantsguide.service.io.FileProcessingService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,9 +18,11 @@ public class GalacticTradeControllerTest {
 
     InMemoryDatabaseImpl database = new InMemoryDatabaseImpl();
     GalacticTradeRepository repository = new GalacticTradeRepositoryImpl(database);
-    GalacticTradeService galacticTradeService = new GalacticTradeService(repository);
+    GalacticTradeService galacticTradeService = new GalacticTradeService(repository,
+            new MetalService(new MetalRepository(new InMemoryDatabaseImpl())));
 
-    GalacticTranslationService translationService = new GalacticTranslationService();
+    GalacticTranslationService translationService =
+            new GalacticTranslationService(new GalacticTranslationRepository(new InMemoryDatabaseImpl()));
     GalacticTransactionController galacticTransactionController = new GalacticTransactionController(galacticTradeService);
     FileProcessingService fileProcessingService = new FileProcessingService(galacticTradeService, translationService);
 

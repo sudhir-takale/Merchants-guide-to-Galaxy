@@ -1,6 +1,7 @@
 package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
+import com.amaap.merchantsguide.repository.MetalRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
 import com.amaap.merchantsguide.repository.impl.GalacticTradeRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
@@ -10,7 +11,9 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 class GalacticTradeServiceTest {
-    GalacticTradeService galacticTradeService = new GalacticTradeService(new GalacticTradeRepositoryImpl(new InMemoryDatabaseImpl()));
+    GalacticTradeService galacticTradeService =
+            new GalacticTradeService(new GalacticTradeRepositoryImpl(new InMemoryDatabaseImpl()),
+                    new MetalService(new MetalRepository(new InMemoryDatabaseImpl())));
 
 
     @Test

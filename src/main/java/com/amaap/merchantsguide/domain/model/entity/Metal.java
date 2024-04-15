@@ -4,9 +4,9 @@ public class Metal {
 
     private int id;
     private String metalName;
-    private int credits;
+    private double credits;
 
-    public Metal(String metalName, int credits) {
+    public Metal(String metalName, double credits) {
         this.metalName = metalName;
         this.credits = credits;
     }
@@ -27,11 +27,11 @@ public class Metal {
         this.metalName = metalName;
     }
 
-    public int getCredits() {
+    public double getCredits() {
         return credits;
     }
 
-    public void setCredits(int credits) {
+    public void setCredits(double credits) {
         this.credits = credits;
     }
 }

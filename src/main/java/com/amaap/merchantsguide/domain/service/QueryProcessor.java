@@ -6,7 +6,7 @@ import com.amaap.merchantsguide.domain.model.valueobject.RomanNumeral;
 public class QueryProcessor {
 
 
-    public int convertToNumber(String romanNumeral) {
+    public static int convertToNumber(String romanNumeral) {
 
         int result = 0;
         int prevValue = 0;

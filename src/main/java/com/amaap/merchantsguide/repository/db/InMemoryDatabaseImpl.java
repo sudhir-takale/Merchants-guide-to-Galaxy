@@ -11,16 +11,20 @@ import java.util.List;
 public class InMemoryDatabaseImpl implements InMemoryDatabase {
 
 
-    private List<GalacticTranslation> galaxyTranslationList = new ArrayList<>();
+    private static  List<GalacticTranslation> galaxyTranslationList = new ArrayList<>();
     private List<GalacticQueryDto> galaxyQueryList = new ArrayList<>();
     private List<GalacticTrade> transactionList = new ArrayList<>();
     private List<Metal> metals = new ArrayList<>();
 
-    @Override
-    public void save(GalacticTranslation token) {
-        this.galaxyTranslationList.add(token);
-    }
 
+    static {
+
+        galaxyTranslationList.add(new GalacticTranslation("glob",'I'));
+        galaxyTranslationList.add(new GalacticTranslation("prok",'V'));
+        galaxyTranslationList.add(new GalacticTranslation("pish",'X'));
+        galaxyTranslationList.add(new GalacticTranslation("tegj",'L'));
+
+    }
 
     @Override
     public List<GalacticQueryDto> getQueryList() {
@@ -50,6 +54,11 @@ public class InMemoryDatabaseImpl implements InMemoryDatabase {
     @Override
     public void saveQuery(GalacticQueryDto query) {
         this.galaxyQueryList.add(query);
+    }
+
+    @Override
+    public void saveTranslation(GalacticTranslation galacticTranslation) {
+        this.galaxyTranslationList.add(galacticTranslation);
     }
 
 }
