@@ -4,7 +4,8 @@ import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
 import com.amaap.merchantsguide.repository.impl.FileRepositoryImpl;
 import com.amaap.merchantsguide.repository.impl.GalacticTransactionRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
-import com.amaap.merchantsguide.service.exception.InvalidFilePathNotExist;
+import com.amaap.merchantsguide.service.io.FileProcessingService;
+import com.amaap.merchantsguide.service.io.exception.InvalidFilePathNotExist;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionUnitException;
 import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
 import org.junit.jupiter.api.Assertions;
@@ -22,7 +23,7 @@ class FileProcessingServiceTest {
     @Test
     void shouldBeAbleToProcessInputFile() throws IOException, InvalidFilePathNotExist, InvalidParameterTypeException {
         // act
-        boolean result = fileProcessingService.processInputFile("D:\\Tasks\\Merchant-Guide\\src\\test\\java\\com\\amaap\\merchantsguide\\resources\\GalacticTransactions.txt");
+        boolean result = fileProcessingService.processInputFile("D:\\Tasks\\Merchant-Guide\\src\\main\\java\\com\\amaap\\merchantsguide\\resources\\GalacticTransactions.txt");
 
         // assert
         Assertions.assertTrue(result);

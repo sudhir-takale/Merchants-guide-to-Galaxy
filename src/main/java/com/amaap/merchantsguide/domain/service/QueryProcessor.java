@@ -6,12 +6,6 @@ import com.amaap.merchantsguide.domain.model.valueobject.RomanNumeral;
 public class QueryProcessor {
 
 
-    public void processQueries(String numeral, String line) {
-        int number = convertToNumber(numeral);
-        System.out.println();
-        System.out.print(line + " " + number);
-    }
-
     public int convertToNumber(String romanNumeral) {
 
         int result = 0;
@@ -34,15 +28,4 @@ public class QueryProcessor {
         return result;
     }
 
-    public void processWithMetal(String numeral, int onePartValue, String line) {
-
-        int number = convertToNumber(numeral) * onePartValue;
-        System.out.println();
-        System.out.print(line + " " + number + "Credits");
-
-    }
-
-    public void processKnownQuery(String line) {
-        System.out.print("I have no idea what you are talking about");
-    }
 }

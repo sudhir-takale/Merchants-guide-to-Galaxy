@@ -1,10 +1,10 @@
-package com.amaap.merchantsguide.service.dto;
+package com.amaap.merchantsguide.domain.model.valueobject;
 
-public class GalacticTranslationDto {
+public class GalacticTranslation {
     private String galacticUnit;
     private char romanNumeral;
 
-    public GalacticTranslationDto(String galacticUnit, char romanNumeral) {
+    public GalacticTranslation(String galacticUnit, char romanNumeral) {
         this.galacticUnit = galacticUnit;
         this.romanNumeral = romanNumeral;
     }
@@ -16,6 +16,7 @@ public class GalacticTranslationDto {
     public char getRomanNumeral() {
         return romanNumeral;
     }
+
 
 
 }

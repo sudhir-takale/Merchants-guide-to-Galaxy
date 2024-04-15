@@ -2,8 +2,8 @@ package com.amaap.merchantsguide.repository.impl;
 
 import com.amaap.merchantsguide.repository.FileRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
-import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
+import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
+import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +16,10 @@ class FileRepositoryImplTest {
     @Test
     void shouldBeAbleToSaveTheGalacticUnits() {
         // arrange
-        GalacticTranslationDto galacticTranslationDto = new GalacticTranslationDto("glob", 'I');
+        GalacticTranslation galacticTranslation = new GalacticTranslation("glob", 'I');
 
         // act
-        boolean result = fileRepository.saveTranslation(galacticTranslationDto);
+        boolean result = fileRepository.saveTranslation(galacticTranslation);
 
         // assert
         Assertions.assertTrue(result);
@@ -29,15 +29,15 @@ class FileRepositoryImplTest {
     @Test
     void shouldBeAbleToGetTheGalacticUnitsList() {
         // arrange
-        GalacticTranslationDto galacticTranslationDto = new GalacticTranslationDto("glob", 'I');
-        GalacticTranslationDto galacticTranslationDto1 = new GalacticTranslationDto("glob", 'I');
-        GalacticTranslationDto galacticTranslationDto2 = new GalacticTranslationDto("prok", 'M');
-        fileRepository.saveTranslation(galacticTranslationDto);
-        fileRepository.saveTranslation(galacticTranslationDto1);
-        fileRepository.saveTranslation(galacticTranslationDto2);
+        GalacticTranslation galacticTranslation = new GalacticTranslation("glob", 'I');
+        GalacticTranslation galacticTranslation1 = new GalacticTranslation("glob", 'I');
+        GalacticTranslation galacticTranslation2 = new GalacticTranslation("prok", 'M');
+        fileRepository.saveTranslation(galacticTranslation);
+        fileRepository.saveTranslation(galacticTranslation1);
+        fileRepository.saveTranslation(galacticTranslation2);
 
         // act
-        List<GalacticTranslationDto> units = fileRepository.getAllTranslations();
+        List<GalacticTranslation> units = fileRepository.getAllTranslations();
 
         // assert
         Assertions.assertEquals(3, units.size());

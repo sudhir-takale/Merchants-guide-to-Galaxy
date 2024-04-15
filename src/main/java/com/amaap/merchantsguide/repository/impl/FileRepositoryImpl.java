@@ -2,8 +2,8 @@ package com.amaap.merchantsguide.repository.impl;
 
 import com.amaap.merchantsguide.repository.FileRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
-import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
+import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
+import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class FileRepositoryImpl implements FileRepository {
     }
 
     @Override
-    public boolean saveTranslation(GalacticTranslationDto token) {
+    public boolean saveTranslation(GalacticTranslation token) {
         this.inMemoryDatabase.save(token);
         return true;
     }
@@ -33,7 +33,7 @@ public class FileRepositoryImpl implements FileRepository {
     }
 
     @Override
-    public List<GalacticTranslationDto> getAllTranslations() {
+    public List<GalacticTranslation> getAllTranslations() {
         return inMemoryDatabase.getAllTranslations();
     }
 

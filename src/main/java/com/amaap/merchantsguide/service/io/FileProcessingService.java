@@ -1,11 +1,16 @@
-package com.amaap.merchantsguide.service;
+package com.amaap.merchantsguide.service.io;
 
 import com.amaap.merchantsguide.config.ConfigValidator;
+import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 import com.amaap.merchantsguide.repository.FileRepository;
-import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
-import com.amaap.merchantsguide.service.exception.*;
-import com.amaap.merchantsguide.service.validator.FilePathValidator;
+import com.amaap.merchantsguide.service.GalacticTransactionService;
+import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
+import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
+import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
+import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionUnitException;
+import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
+import com.amaap.merchantsguide.service.io.exception.InvalidFilePathNotExist;
+import com.amaap.merchantsguide.service.io.validator.FilePathValidator;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -34,7 +39,7 @@ public class FileProcessingService {
         return true;
     }
 
-    boolean parseInputLine(String line) throws InvalidParameterTypeException {
+    public boolean parseInputLine(String line) throws InvalidParameterTypeException {
 
         if (line.matches("^\\w+\\s+is\\s+\\w+$")) {
             foundGalacticUnit(line);
@@ -50,8 +55,6 @@ public class FileProcessingService {
     private void foundGalacticQuery(String line) {
         if (line.contains("is")) {
             String[] transactionToken = line.split("is");
-
-
             GalacticQueryDto query = new GalacticQueryDto(transactionToken[1]);
             fileRepository.save(query);
         } else {
@@ -82,7 +85,7 @@ public class FileProcessingService {
         char numeral = parts[2].charAt(0);
         if (!galacticTranslation.containsKey(unit) || !galacticTranslation.containsValue(numeral))
             throw new InvalidGalacticTransactionUnitException(unit + " Invalid galactic translation found");
-        GalacticTranslationDto token = new GalacticTranslationDto(unit, numeral);
+        GalacticTranslation token = new GalacticTranslation(unit, numeral);
         fileRepository.saveTranslation(token);
     }
 }

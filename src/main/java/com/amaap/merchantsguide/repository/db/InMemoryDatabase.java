@@ -1,24 +1,23 @@
 package com.amaap.merchantsguide.repository.db;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
-import com.amaap.merchantsguide.domain.model.entity.User;
-import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
+import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
+import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 
 import java.util.List;
 
 public interface InMemoryDatabase {
 
-     void save(GalacticTranslationDto token);
+     void save(GalacticTranslation token);
 
      void insert(GalacticQueryDto query);
 
      List<GalacticQueryDto> getQueryList();
 
-     List<GalacticTranslationDto> getAllTranslations();
+     List<GalacticTranslation> getAllTranslations();
      List<GalacticTransaction> getTransactions();
 
      void addTransaction(GalacticTransaction galacticTransaction);
 
-     void insertUser(User user);
+
 }

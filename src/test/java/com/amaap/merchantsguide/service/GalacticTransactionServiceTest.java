@@ -1,11 +1,7 @@
 package com.amaap.merchantsguide.service;
 
-import com.amaap.merchantsguide.controller.GalacticTransactionController;
-import com.amaap.merchantsguide.controller.InputProcessingController;
 import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
-import com.amaap.merchantsguide.repository.GalacticTransactionRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
-import com.amaap.merchantsguide.repository.impl.FileRepositoryImpl;
 import com.amaap.merchantsguide.repository.impl.GalacticTransactionRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
 import org.junit.jupiter.api.Assertions;

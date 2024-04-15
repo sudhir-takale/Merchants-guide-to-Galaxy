@@ -1,23 +1,20 @@
 package com.amaap.merchantsguide.repository.db;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
-import com.amaap.merchantsguide.domain.model.entity.User;
-import com.amaap.merchantsguide.service.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.service.dto.GalacticTranslationDto;
+import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
+import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InMemoryDatabaseImpl implements InMemoryDatabase {
 
-    int userId = 0;
-    private List<User> users = new ArrayList<>();
-    private List<GalacticTranslationDto> galaxyTranslationList = new ArrayList<>();
+    private List<GalacticTranslation> galaxyTranslationList = new ArrayList<>();
     private List<GalacticQueryDto> galaxyQueryList = new ArrayList<>();
     private List<GalacticTransaction> transactionList = new ArrayList<>();
 
     @Override
-    public void save(GalacticTranslationDto token) {
+    public void save(GalacticTranslation token) {
         this.galaxyTranslationList.add(token);
     }
 
@@ -32,7 +29,7 @@ public class InMemoryDatabaseImpl implements InMemoryDatabase {
     }
 
     @Override
-    public List<GalacticTranslationDto> getAllTranslations() {
+    public List<GalacticTranslation> getAllTranslations() {
         return this.galaxyTranslationList;
     }
 
@@ -45,13 +42,5 @@ public class InMemoryDatabaseImpl implements InMemoryDatabase {
     public void addTransaction(GalacticTransaction galacticTransaction) {
         this.transactionList.add(galacticTransaction);
     }
-
-    @Override
-    public void insertUser(User user) {
-        userId++;
-        user.setId(userId);
-        users.add(user);
-    }
-
 
 }

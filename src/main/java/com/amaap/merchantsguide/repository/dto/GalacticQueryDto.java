@@ -1,7 +1,7 @@
-package com.amaap.merchantsguide.service.dto;
+package com.amaap.merchantsguide.repository.dto;
 
 public class GalacticQueryDto {
-    private  String query;
+    private String query;
 
     public GalacticQueryDto(String query) {
         this.query = query;
