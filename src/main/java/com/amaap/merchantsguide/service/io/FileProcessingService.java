@@ -19,6 +19,7 @@ public class FileProcessingService {
     private final GalacticTradeService galacticTradeService;
     private final ConfigValidator configValidator;
     private final GalacticTranslationService galacticTranslationService;
+
     public FileProcessingService(GalacticTradeService galacticTradeService, GalacticTranslationService galacticTranslationService) {
         this.galacticTradeService = galacticTradeService;
         this.galacticTranslationService = galacticTranslationService;
@@ -50,11 +51,20 @@ public class FileProcessingService {
     }
 
     private void foundGalacticQuery(String line) {
+//        if (line.contains("is")) {
+//            String[] transactionToken = line.split("is");
+//            galacticTradeService.createQuery(transactionToken[1]);
+//        } else {
+//            galacticTradeService.createQuery(line);
+//        }
         if (line.contains("is")) {
+            line = line.endsWith("?") ? line.substring(0, line.length() - 1) : line;
             String[] transactionToken = line.split("is");
-            galacticTradeService.createQuery(transactionToken[1]);
+            String queryContent = transactionToken[1];
+            galacticTradeService.createQuery(queryContent);
         } else {
             galacticTradeService.createQuery(line);
+
         }
     }
 

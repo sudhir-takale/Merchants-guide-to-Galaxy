@@ -30,7 +30,9 @@ public class InMemoryDatabaseImpl implements InMemoryDatabase {
 
         galaxyQueryList.add(new GalacticQueryDto("glob prok Silver"));
         galaxyQueryList.add(new GalacticQueryDto("glob prok Gold"));
-        galaxyQueryList.add(new GalacticQueryDto("glob prok Iron "));
+        galaxyQueryList.add(new GalacticQueryDto("glob prok Iron"));
+        galaxyQueryList.add(new GalacticQueryDto("pish tegj glob glob"));
+        galaxyQueryList.add(new GalacticQueryDto("This is invalid query that you are processing "));
 
         metals.add(new Metal("Silver", 17.0));
         metals.add(new Metal("Gold", 14450.0));

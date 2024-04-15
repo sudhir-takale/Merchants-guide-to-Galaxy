@@ -25,7 +25,6 @@ public class GalacticTradeService {
             throw new InvalidGalacticTransactionFound("Invalid " + "argument passed exception");
 
         GalacticTrade galacticTrade = new GalacticTrade(unit, metal, credits);
-//        System.out.println(metal + credits + unit);
         int perUnitCredits = getPerUnitCreditOfMetal(unit, metal, credits);
         metalService.create(metal, credits);
 
@@ -36,7 +35,6 @@ public class GalacticTradeService {
 
         String[] units = unit.split(" ");
         String numeral = getNumeralValue(units);
-        System.out.println("Numeral is " + numeral);
         int number = QueryProcessor.convertToNumber(numeral);
         return credits / number;
     }
@@ -44,7 +42,8 @@ public class GalacticTradeService {
     private String getNumeralValue(String[] metal) {
         StringBuilder builder = new StringBuilder();
         List<GalacticTranslation> token = getTranslations();
-
+//        System.out.println("printing tokens");
+//        token.forEach(System.out::println);
 
         for (String unit : metal) {
             boolean found = false;
@@ -56,19 +55,12 @@ public class GalacticTradeService {
                 }
             }
         }
-//        System.out.println(builder.toString());
         return builder.toString();
     }
 
     public void createQuery(String query) {
         this.transactionRepository.createQuery(query);
     }
-
-
-    public List<GalacticTrade> fetchTransactions() {
-        return transactionRepository.getTransactions();
-    }
-
 
     public List<GalacticQueryDto> getAllQueries() {
         return this.transactionRepository.getAllQueries();
@@ -85,11 +77,18 @@ public class GalacticTradeService {
         List<GalacticQueryDto> queryDtos = getAllQueries();
         for (GalacticQueryDto dto : queryDtos) {
             String[] unit = dto.getQuery().split(" ");
-            String[] newArray = {unit[0].trim(), unit[1].trim()};
-            String romanValue = getNumeralValue(newArray);
-            double credits = getCredits(unit[2]);
-            QueryProcessor.processQuery(dto.getQuery(),romanValue, credits);
+            if (unit.length >  4) {
+                QueryProcessor.processInvalidQuery(dto.getQuery());
 
+            } else if (unit.length == 3) {
+                String[] newArray = {unit[0].trim(), unit[1].trim()};
+                String romanValue = getNumeralValue(newArray);
+                double credits = getCredits(unit[2]);
+                QueryProcessor.processQuery(dto.getQuery(), romanValue, credits);
+            } else {
+                String romanValue = getNumeralValue(unit);
+                QueryProcessor.processQueryWithoutMetal(dto.getQuery(),romanValue);
+            }
         }
 
     }
@@ -97,7 +96,6 @@ public class GalacticTradeService {
     private double getCredits(String s) {
         double credit = 0;
         List<Metal> metals = getMetals();
-
         for (Metal metal : metals) {
             if (metal.getMetalName().trim().equals(s)) {
                 credit = metal.getCredits();
@@ -108,6 +106,10 @@ public class GalacticTradeService {
 
     public List<Metal> getMetals() {
         return transactionRepository.getMetals();
+    }
+
+    public List<GalacticTrade> fetchTransactions() {
+        return this.transactionRepository.getTransactions();
     }
 }
 

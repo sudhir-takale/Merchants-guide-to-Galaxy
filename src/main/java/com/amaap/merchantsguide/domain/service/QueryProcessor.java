@@ -30,11 +30,18 @@ public class QueryProcessor {
 
 
     public static void processQuery(String query, String romanValue, double credits) {
-
         int number = convertToNumber(romanValue);
         int totalCredits = (int) (number * credits);
         System.out.println(query + " is " + totalCredits + " Credits");
+    }
 
+    public static void processInvalidQuery(String query) {
+        System.out.println("I have no idea what you are talking about");
+    }
+
+    public static void processQueryWithoutMetal(String query, String romanValue) {
+        int credit = convertToNumber(romanValue);
+        System.out.println(query + " " + credit);
 
     }
 }
