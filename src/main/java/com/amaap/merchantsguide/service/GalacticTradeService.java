@@ -1,6 +1,7 @@
 package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
+import com.amaap.merchantsguide.domain.model.entity.Metal;
 import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 import com.amaap.merchantsguide.domain.service.QueryProcessor;
 import com.amaap.merchantsguide.repository.GalacticTradeRepository;
@@ -79,6 +80,35 @@ public class GalacticTradeService {
     }
 
 
+    public void processQuery() {
+
+        List<GalacticQueryDto> queryDtos = getAllQueries();
+        for (GalacticQueryDto dto : queryDtos) {
+            String[] unit = dto.getQuery().split(" ");
+            String[] newArray = {unit[0].trim(), unit[1].trim()};
+            String romanValue = getNumeralValue(newArray);
+            double credits = getCredits(unit[2]);
+            QueryProcessor.processQuery(dto.getQuery(),romanValue, credits);
+
+        }
+
+    }
+
+    private double getCredits(String s) {
+        double credit = 0;
+        List<Metal> metals = getMetals();
+
+        for (Metal metal : metals) {
+            if (metal.getMetalName().trim().equals(s)) {
+                credit = metal.getCredits();
+            }
+        }
+        return credit;
+    }
+
+    public List<Metal> getMetals() {
+        return transactionRepository.getMetals();
+    }
 }
 
 

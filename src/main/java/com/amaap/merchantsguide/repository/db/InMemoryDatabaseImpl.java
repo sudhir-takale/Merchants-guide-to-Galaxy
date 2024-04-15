@@ -11,19 +11,30 @@ import java.util.List;
 public class InMemoryDatabaseImpl implements InMemoryDatabase {
 
 
-    private static  List<GalacticTranslation> galaxyTranslationList = new ArrayList<>();
-    private List<GalacticQueryDto> galaxyQueryList = new ArrayList<>();
-    private List<GalacticTrade> transactionList = new ArrayList<>();
-    private List<Metal> metals = new ArrayList<>();
+    private static List<GalacticTranslation> galaxyTranslationList = new ArrayList<>();
+    private static List<GalacticQueryDto> galaxyQueryList = new ArrayList<>();
+    private static List<GalacticTrade> transactionList = new ArrayList<>();
+    private static List<Metal> metals = new ArrayList<>();
 
 
     static {
 
-        galaxyTranslationList.add(new GalacticTranslation("glob",'I'));
-        galaxyTranslationList.add(new GalacticTranslation("prok",'V'));
-        galaxyTranslationList.add(new GalacticTranslation("pish",'X'));
-        galaxyTranslationList.add(new GalacticTranslation("tegj",'L'));
+        galaxyTranslationList.add(new GalacticTranslation("glob", 'I'));
+        galaxyTranslationList.add(new GalacticTranslation("prok", 'V'));
+        galaxyTranslationList.add(new GalacticTranslation("pish", 'X'));
+        galaxyTranslationList.add(new GalacticTranslation("tegj", 'L'));
 
+        transactionList.add(new GalacticTrade("glob glob", "Silver", 34));
+        transactionList.add(new GalacticTrade("glob prok", "Gold", 57800));
+        transactionList.add(new GalacticTrade("pish pish", "Iron", 3910));
+
+        galaxyQueryList.add(new GalacticQueryDto("glob prok Silver"));
+        galaxyQueryList.add(new GalacticQueryDto("glob prok Gold"));
+        galaxyQueryList.add(new GalacticQueryDto("glob prok Iron "));
+
+        metals.add(new Metal("Silver", 17.0));
+        metals.add(new Metal("Gold", 14450.0));
+        metals.add(new Metal("Iron", 195.5));
     }
 
     @Override
@@ -43,22 +54,27 @@ public class InMemoryDatabaseImpl implements InMemoryDatabase {
 
     @Override
     public void addTransaction(GalacticTrade galacticTrade) {
-        this.transactionList.add(galacticTrade);
+        transactionList.add(galacticTrade);
     }
 
     @Override
     public void saveMetal(Metal newMetal) {
-        this.metals.add(newMetal);
+        metals.add(newMetal);
     }
 
     @Override
     public void saveQuery(GalacticQueryDto query) {
-        this.galaxyQueryList.add(query);
+        galaxyQueryList.add(query);
     }
 
     @Override
     public void saveTranslation(GalacticTranslation galacticTranslation) {
-        this.galaxyTranslationList.add(galacticTranslation);
+        galaxyTranslationList.add(galacticTranslation);
+    }
+
+    @Override
+    public List<Metal> getMetals() {
+        return metals;
     }
 
 }

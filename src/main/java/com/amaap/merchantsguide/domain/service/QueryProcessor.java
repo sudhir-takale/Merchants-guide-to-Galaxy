@@ -28,4 +28,13 @@ public class QueryProcessor {
         return result;
     }
 
+
+    public static void processQuery(String query, String romanValue, double credits) {
+
+        int number = convertToNumber(romanValue);
+        int totalCredits = (int) (number * credits);
+        System.out.println(query + " is " + totalCredits + " Credits");
+
+
+    }
 }

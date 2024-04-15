@@ -23,4 +23,6 @@ public interface InMemoryDatabase {
     void saveQuery(GalacticQueryDto dto);
 
     void saveTranslation(GalacticTranslation galacticTranslation);
+
+    List<Metal> getMetals();
 }

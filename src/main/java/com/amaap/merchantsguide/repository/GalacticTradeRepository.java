@@ -1,6 +1,7 @@
 package com.amaap.merchantsguide.repository;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
+import com.amaap.merchantsguide.domain.model.entity.Metal;
 import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
 import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 
@@ -16,4 +17,6 @@ public interface GalacticTradeRepository {
     List<GalacticTranslation> getTranslationDto();
 
     void createQuery(String query);
+
+    List<Metal> getMetals();
 }

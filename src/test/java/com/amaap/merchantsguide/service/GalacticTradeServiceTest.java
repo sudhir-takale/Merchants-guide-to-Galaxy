@@ -57,6 +57,12 @@ class GalacticTradeServiceTest {
     }
 
 
+    @Test
+    void shouldBeAbleToProcessAllQueries() {
+
+        galacticTradeService.processQuery();
+
+    }
 
 
 }

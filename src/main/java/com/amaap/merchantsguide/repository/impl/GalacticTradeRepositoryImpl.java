@@ -1,6 +1,7 @@
 package com.amaap.merchantsguide.repository.impl;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
+import com.amaap.merchantsguide.domain.model.entity.Metal;
 import com.amaap.merchantsguide.repository.GalacticTradeRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
@@ -41,5 +42,10 @@ public class GalacticTradeRepositoryImpl implements GalacticTradeRepository {
     public void createQuery(String query) {
         GalacticQueryDto galacticQueryDto = new GalacticQueryDto(query);
         inMemoryDatabase.saveQuery(galacticQueryDto);
+    }
+
+    @Override
+    public List<Metal> getMetals() {
+        return this.inMemoryDatabase.getMetals();
     }
 }
