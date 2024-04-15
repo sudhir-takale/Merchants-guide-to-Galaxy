@@ -1,10 +1,8 @@
 package com.amaap.merchantsguide.service.io;
 
 import com.amaap.merchantsguide.config.ConfigValidator;
-import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
-import com.amaap.merchantsguide.repository.FileRepository;
-import com.amaap.merchantsguide.service.GalacticTransactionService;
-import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
+import com.amaap.merchantsguide.service.GalacticTradeService;
+import com.amaap.merchantsguide.service.GalacticTranslationService;
 import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionUnitException;
@@ -18,13 +16,12 @@ import java.io.IOException;
 import java.util.Map;
 
 public class FileProcessingService {
-    private final FileRepository fileRepository;
-    private final GalacticTransactionService galacticTransactionService;
+    private final GalacticTradeService galacticTradeService;
     private final ConfigValidator configValidator;
-
-    public FileProcessingService(FileRepository fileRepository, GalacticTransactionService galacticTransactionService) {
-        this.fileRepository = fileRepository;
-        this.galacticTransactionService = galacticTransactionService;
+    private final GalacticTranslationService galacticTranslationService;
+    public FileProcessingService(GalacticTradeService galacticTradeService, GalacticTranslationService galacticTranslationService) {
+        this.galacticTradeService = galacticTradeService;
+        this.galacticTranslationService = galacticTranslationService;
         this.configValidator = new ConfigValidator();
     }
 
@@ -55,11 +52,9 @@ public class FileProcessingService {
     private void foundGalacticQuery(String line) {
         if (line.contains("is")) {
             String[] transactionToken = line.split("is");
-            GalacticQueryDto query = new GalacticQueryDto(transactionToken[1]);
-            fileRepository.save(query);
+            galacticTradeService.createQuery(transactionToken[1]);
         } else {
-            GalacticQueryDto query = new GalacticQueryDto(line);
-            fileRepository.save(query);
+            galacticTradeService.createQuery(line);
         }
     }
 
@@ -74,7 +69,7 @@ public class FileProcessingService {
         if (!metals.containsValue(transactionToken[2]) || Integer.parseInt(transactionToken[4]) < 0)
             throw new InValidMetalFoundException(transactionToken[2] + " Invalid metal type found");
         else {
-            galacticTransactionService.createTransaction(unit, transactionToken[2], Integer.parseInt(transactionToken[4]));
+            galacticTradeService.createTransaction(unit, transactionToken[2], Integer.parseInt(transactionToken[4]));
         }
     }
 
@@ -85,7 +80,6 @@ public class FileProcessingService {
         char numeral = parts[2].charAt(0);
         if (!galacticTranslation.containsKey(unit) || !galacticTranslation.containsValue(numeral))
             throw new InvalidGalacticTransactionUnitException(unit + " Invalid galactic translation found");
-        GalacticTranslation token = new GalacticTranslation(unit, numeral);
-        fileRepository.saveTranslation(token);
+        galacticTranslationService.createTranslation(unit, numeral);
     }
 }

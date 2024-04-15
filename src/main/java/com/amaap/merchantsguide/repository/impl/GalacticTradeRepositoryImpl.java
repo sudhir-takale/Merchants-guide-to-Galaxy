@@ -1,29 +1,29 @@
 package com.amaap.merchantsguide.repository.impl;
 
-import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
-import com.amaap.merchantsguide.repository.GalacticTransactionRepository;
+import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
+import com.amaap.merchantsguide.repository.GalacticTradeRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
 import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 
 import java.util.List;
 
-public class GalacticTransactionRepositoryImpl implements GalacticTransactionRepository {
+public class GalacticTradeRepositoryImpl implements GalacticTradeRepository {
 
     private final InMemoryDatabase inMemoryDatabase;
 
-    public GalacticTransactionRepositoryImpl(InMemoryDatabase inMemoryDatabase) {
+    public GalacticTradeRepositoryImpl(InMemoryDatabase inMemoryDatabase) {
         this.inMemoryDatabase = inMemoryDatabase;
     }
 
     @Override
-    public int saveTransaction(GalacticTransaction galacticTransaction) {
-        inMemoryDatabase.addTransaction(galacticTransaction);
+    public int saveTransaction(GalacticTrade galacticTrade) {
+        inMemoryDatabase.addTransaction(galacticTrade);
         return 1;
     }
 
     @Override
-    public List<GalacticTransaction> getTransactions() {
+    public List<GalacticTrade> getTransactions() {
         return this.inMemoryDatabase.getTransactions();
     }
 
@@ -35,5 +35,11 @@ public class GalacticTransactionRepositoryImpl implements GalacticTransactionRep
     @Override
     public List<GalacticTranslation> getTranslationDto() {
         return inMemoryDatabase.getAllTranslations();
+    }
+
+    @Override
+    public void createQuery(String query) {
+        GalacticQueryDto galacticQueryDto = new GalacticQueryDto(query);
+        inMemoryDatabase.saveQuery(galacticQueryDto);
     }
 }

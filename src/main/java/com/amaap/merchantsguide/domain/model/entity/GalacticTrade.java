@@ -1,20 +1,16 @@
 package com.amaap.merchantsguide.domain.model.entity;
 
-public class GalacticTransaction {
+public class GalacticTrade {
 
     private final String transactionName;
     private final String metal;
     private final int credit;
     private int transactionId;
 
-    public GalacticTransaction(String transactionName, String metal, int credit) {
+    public GalacticTrade(String transactionName, String metal, int credit) {
         this.transactionName = transactionName;
         this.metal = metal;
         this.credit = credit;
-    }
-
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
     }
 
     public int getCredit() {
@@ -27,6 +23,10 @@ public class GalacticTransaction {
 
     public int getTransactionId() {
         return transactionId;
+    }
+
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
     }
 
     public String getTransactionName() {

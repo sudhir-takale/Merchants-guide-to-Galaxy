@@ -1,21 +1,20 @@
 package com.amaap.merchantsguide.service;
 
-import com.amaap.merchantsguide.domain.model.entity.GalacticTransaction;
+import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
 import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 import com.amaap.merchantsguide.domain.service.QueryProcessor;
-import com.amaap.merchantsguide.repository.GalacticTransactionRepository;
+import com.amaap.merchantsguide.repository.GalacticTradeRepository;
 import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
 import com.amaap.merchantsguide.service.validator.TransactionValidator;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class GalacticTransactionService {
-    private final GalacticTransactionRepository transactionRepository;
+public class GalacticTradeService {
+    private final GalacticTradeRepository transactionRepository;
     QueryProcessor queryProcessor = new QueryProcessor();
 
-    public GalacticTransactionService(GalacticTransactionRepository transactionRepository) {
+    public GalacticTradeService(GalacticTradeRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
     }
 
@@ -23,11 +22,17 @@ public class GalacticTransactionService {
         if (TransactionValidator.validateTransaction(unit, metal, credits))
             throw new InvalidGalacticTransactionFound("Invalid " + "argument passed exception");
 
-        GalacticTransaction galacticTransaction = new GalacticTransaction(unit, metal, credits);
-        return transactionRepository.saveTransaction(galacticTransaction) == 1;
+        GalacticTrade galacticTrade = new GalacticTrade(unit, metal, credits);
+        return transactionRepository.saveTransaction(galacticTrade) == 1;
     }
 
-    public List<GalacticTransaction> fetchTransactions() {
+    public void createQuery(String query) {
+        this.transactionRepository.createQuery(query);
+    }
+
+
+
+    public List<GalacticTrade> fetchTransactions() {
         return transactionRepository.getTransactions();
     }
 
@@ -40,14 +45,7 @@ public class GalacticTransactionService {
         return this.transactionRepository.getTranslationDto();
     }
 
-    public List<String> getMetals() {
-        List<String> metals = new ArrayList<String>();
-        List<GalacticTransaction> transactionList = fetchTransactions();
-        for (GalacticTransaction transaction : transactionList) {
-            metals.add(transaction.getMetal());
-        }
-        return metals;
-    }
+
 
 }
 

@@ -1,13 +1,12 @@
 package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
-import com.amaap.merchantsguide.repository.impl.FileRepositoryImpl;
-import com.amaap.merchantsguide.repository.impl.GalacticTransactionRepositoryImpl;
+import com.amaap.merchantsguide.repository.impl.GalacticTradeRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
-import com.amaap.merchantsguide.service.io.FileProcessingService;
-import com.amaap.merchantsguide.service.io.exception.InvalidFilePathNotExist;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionUnitException;
 import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
+import com.amaap.merchantsguide.service.io.FileProcessingService;
+import com.amaap.merchantsguide.service.io.exception.InvalidFilePathNotExist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +16,8 @@ import java.io.IOException;
 class FileProcessingServiceTest {
 
     FileProcessingService fileProcessingService =
-            new FileProcessingService(new FileRepositoryImpl(new InMemoryDatabaseImpl()),
-                    new GalacticTransactionService(new GalacticTransactionRepositoryImpl(new InMemoryDatabaseImpl())));
+            new FileProcessingService(new GalacticTradeService(new GalacticTradeRepositoryImpl(new InMemoryDatabaseImpl())),
+                    new GalacticTranslationService());
 
     @Test
     void shouldBeAbleToProcessInputFile() throws IOException, InvalidFilePathNotExist, InvalidParameterTypeException {

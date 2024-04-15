@@ -1,6 +1,7 @@
 package com.amaap.merchantsguide.domain.model.valueobject;
 
 public class GalacticTranslation {
+    private int id;
     private String galacticUnit;
     private char romanNumeral;
 
@@ -16,7 +17,6 @@ public class GalacticTranslation {
     public char getRomanNumeral() {
         return romanNumeral;
     }
-
 
 
 }
