@@ -55,7 +55,7 @@ Solution:
     - Model
         - GalacticTransactions
           - id
-          - transaction
+          - GalacticTransaction
           - Metal
           - Credits
         - RomanTranslation(enum)
