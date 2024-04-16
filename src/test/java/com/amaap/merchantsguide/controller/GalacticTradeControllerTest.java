@@ -23,7 +23,7 @@ public class GalacticTradeControllerTest {
 
     GalacticTranslationService translationService =
             new GalacticTranslationService(new GalacticTranslationRepository(new InMemoryDatabaseImpl()));
-    GalacticTransactionController galacticTransactionController = new GalacticTransactionController(galacticTradeService);
+    GalacticTradeController galacticTradeController = new GalacticTradeController(galacticTradeService);
     FileProcessingService fileProcessingService = new FileProcessingService(galacticTradeService, translationService);
 
     @Test
@@ -31,7 +31,7 @@ public class GalacticTradeControllerTest {
         Response expected = new Response(HttpStatus.OK, "Transactions has been fetched successfully");
 
         // act
-        Response actual = galacticTransactionController.fetchAllTransactions();
+        Response actual = galacticTradeController.fetchAllTransactions();
 
         // assert
         Assertions.assertEquals(expected, actual);

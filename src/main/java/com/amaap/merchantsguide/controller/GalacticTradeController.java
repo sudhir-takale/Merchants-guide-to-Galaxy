@@ -4,10 +4,10 @@ import com.amaap.merchantsguide.controller.dto.HttpStatus;
 import com.amaap.merchantsguide.controller.dto.Response;
 import com.amaap.merchantsguide.service.GalacticTradeService;
 
-public class GalacticTransactionController {
+public class GalacticTradeController {
     private final GalacticTradeService galacticTradeService;
 
-    public GalacticTransactionController(GalacticTradeService galacticTradeService) {
+    public GalacticTradeController(GalacticTradeService galacticTradeService) {
         this.galacticTradeService = galacticTradeService;
     }
 
