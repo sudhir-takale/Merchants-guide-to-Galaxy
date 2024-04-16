@@ -10,7 +10,7 @@ public class MetalService {
         this.metalRepository = metalRepository;
     }
 
-    public boolean create(String metal, int credit) {
+    public boolean create(String metal, double credit) {
         if (metal.isEmpty() || credit < 0) return false;
         Metal newMetal = new Metal(metal, credit);
         metalRepository.add(newMetal);

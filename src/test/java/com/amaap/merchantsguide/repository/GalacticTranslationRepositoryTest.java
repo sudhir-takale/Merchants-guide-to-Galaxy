@@ -15,6 +15,10 @@ class GalacticTranslationRepositoryTest {
     @Test
     void shouldBeAbleToGetAllTranslations() {
         // act
+        galacticTranslationRepository.save(new GalacticTranslation("glob",'I'));
+        galacticTranslationRepository.save(new GalacticTranslation("prok",'V'));
+        galacticTranslationRepository.save(new GalacticTranslation("tegj",'L'));
+        galacticTranslationRepository.save(new GalacticTranslation("pish",'X'));
         List<GalacticTranslation> result = galacticTranslationRepository.getTranslation();
 
         // assert

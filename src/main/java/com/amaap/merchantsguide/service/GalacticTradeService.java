@@ -25,18 +25,21 @@ public class GalacticTradeService {
             throw new InvalidGalacticTransactionFound("Invalid " + "argument passed exception");
 
         GalacticTrade galacticTrade = new GalacticTrade(unit, metal, credits);
-        int perUnitCredits = getPerUnitCreditOfMetal(unit, metal, credits);
-        metalService.create(metal, credits);
+        if (metal != null) {
+            double perUnitCredits = getPerUnitCreditOfMetal(unit, metal, credits);
+            metalService.create(metal, perUnitCredits);
+        }
 
         return transactionRepository.saveTransaction(galacticTrade) == 1;
     }
 
-    private int getPerUnitCreditOfMetal(String unit, String metal, int credits) {
+    private double getPerUnitCreditOfMetal(String unit, String metal, int credits) {
 
         String[] units = unit.split(" ");
         String numeral = getNumeralValue(units);
         int number = QueryProcessor.convertToNumber(numeral);
-        return credits / number;
+        if(number == 0) return 0;
+        return (double) (credits / number);
     }
 
     private String getNumeralValue(String[] metal) {
@@ -75,7 +78,7 @@ public class GalacticTradeService {
         List<GalacticQueryDto> queryDtos = getAllQueries();
         for (GalacticQueryDto dto : queryDtos) {
             String[] unit = dto.getQuery().split(" ");
-            if (unit.length >  4) {
+            if (unit.length > 4) {
                 QueryProcessor.processInvalidQuery(dto.getQuery());
 
             } else if (unit.length == 3) {
@@ -86,7 +89,7 @@ public class GalacticTradeService {
                 QueryProcessor.processQuery(dto.getQuery(), romanValue, credits);
             } else {
                 String romanValue = getNumeralValue(unit);
-                QueryProcessor.processQueryWithoutMetal(dto.getQuery(),romanValue);
+                QueryProcessor.processQueryWithoutMetal(dto.getQuery(), romanValue);
             }
         }
 
@@ -100,6 +103,7 @@ public class GalacticTradeService {
                 credit = metal.getCredits();
             }
         }
+
         return credit;
     }
 

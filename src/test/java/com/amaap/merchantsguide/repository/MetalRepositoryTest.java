@@ -14,10 +14,12 @@ class MetalRepositoryTest {
     @Test
     void shouldBeAbleToGetAllMetals() {
         // act
+        metalRepository.add(new Metal("Silver",34));
+        metalRepository.add(new Metal("Gold",34));
         List<Metal> metal = metalRepository.getMetals();
 
         // assert
-        Assertions.assertEquals(3, metal.size());
+        Assertions.assertEquals(2, metal.size());
 
     }
 

@@ -51,21 +51,23 @@ public class FileProcessingService {
     }
 
     private void foundGalacticQuery(String line) {
-//        if (line.contains("is")) {
-//            String[] transactionToken = line.split("is");
-//            galacticTradeService.createQuery(transactionToken[1]);
-//        } else {
-//            galacticTradeService.createQuery(line);
-//        }
         if (line.contains("is")) {
+            // Remove the question mark if it exists at the end of the line
             line = line.endsWith("?") ? line.substring(0, line.length() - 1) : line;
-            String[] transactionToken = line.split("is");
-            String queryContent = transactionToken[1];
+            String queryContent;
+
+            if (line.startsWith("how much")) {
+                queryContent = line.substring(line.indexOf("is") + 2).trim();
+            } else {
+                queryContent = line.substring(line.indexOf("is") + 2).trim();
+            }
+
+
             galacticTradeService.createQuery(queryContent);
         } else {
             galacticTradeService.createQuery(line);
-
         }
+
     }
 
     private void foundGalacticTransaction(String line) throws InvalidParameterTypeException {

@@ -1,24 +1,33 @@
 package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
+import com.amaap.merchantsguide.repository.GalacticTradeRepository;
 import com.amaap.merchantsguide.repository.GalacticTranslationRepository;
 import com.amaap.merchantsguide.repository.MetalRepository;
+import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
 import com.amaap.merchantsguide.repository.impl.GalacticTradeRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
+import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
 import com.amaap.merchantsguide.service.io.FileProcessingService;
+import com.amaap.merchantsguide.service.io.exception.InvalidFilePathNotExist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 class GalacticTradeServiceTest {
-    GalacticTradeService galacticTradeService =
-            new GalacticTradeService(new GalacticTradeRepositoryImpl(new InMemoryDatabaseImpl()),
-                    new MetalService(new MetalRepository(new InMemoryDatabaseImpl())));
+    InMemoryDatabase database = new InMemoryDatabaseImpl();
+    GalacticTranslationRepository galacticTranslationRepository = new GalacticTranslationRepository(database);
+    GalacticTranslationService galacticTranslationService = new GalacticTranslationService(galacticTranslationRepository);
+    MetalRepository metalRepository = new MetalRepository(database);
+    MetalService metalService = new MetalService(metalRepository);
+    GalacticTradeRepository tradeRepository = new GalacticTradeRepositoryImpl(database);
+    GalacticTradeService galacticTradeService = new GalacticTradeService(tradeRepository, metalService);
+    FileProcessingService fileProcessingService = new FileProcessingService(galacticTradeService, galacticTranslationService);
 
-//FileProcessingService fileProcessingService =
-//        new FileProcessingService(new GalacticTradeService(new GalacticTradeRepositoryImpl(new InMemoryDatabaseImpl()),new MetalService(new MetalRepository(new InMemoryDatabaseImpl()))));
+
     @Test
     void shouldBeAbleToCreateANewGalacticTransaction() throws InvalidGalacticTransactionFound {
         // arrange
@@ -62,9 +71,12 @@ class GalacticTradeServiceTest {
 
 
     @Test
-    void shouldBeAbleToProcessAllQueries() {
+    void shouldBeAbleToProcessAllQueries() throws InvalidParameterTypeException, InvalidFilePathNotExist, IOException {
 
+        fileProcessingService.processInputFile("D:\\Tasks\\Merchant-Guide\\src\\main\\java\\com\\amaap" +
+                "\\merchantsguide\\resources\\GalacticTransactions.txt");
 
+        galacticTradeService.processQuery();
 
     }
 
