@@ -2,10 +2,11 @@ package com.amaap.merchantsguide.repository.impl;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
 import com.amaap.merchantsguide.domain.model.entity.Metal;
+import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 import com.amaap.merchantsguide.repository.GalacticTradeRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
-import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
+import com.google.inject.Inject;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class GalacticTradeRepositoryImpl implements GalacticTradeRepository {
 
     private final InMemoryDatabase inMemoryDatabase;
 
+    @Inject
     public GalacticTradeRepositoryImpl(InMemoryDatabase inMemoryDatabase) {
         this.inMemoryDatabase = inMemoryDatabase;
     }

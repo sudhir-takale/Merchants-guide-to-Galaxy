@@ -1,7 +1,7 @@
 package com.amaap.merchantsguide.service;
 
-import com.amaap.merchantsguide.repository.MetalRepository;
-import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
+import com.amaap.merchantsguide.repository.MetalRepositoryImpl;
+import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MetalServiceTest {
 
-    MetalService metalService = new MetalService(new MetalRepository(new InMemoryDatabaseImpl()));
+    MetalService metalService = new MetalService(new MetalRepositoryImpl(new FakeInMemoryDatabase()));
 
     @Test
     void shouldCreateMetalSuccessfully() {

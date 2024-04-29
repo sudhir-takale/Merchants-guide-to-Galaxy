@@ -1,19 +1,21 @@
 package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.domain.model.entity.Metal;
-import com.amaap.merchantsguide.repository.MetalRepository;
+import com.amaap.merchantsguide.repository.MetalRepositoryImpl;
+import com.google.inject.Inject;
 
 public class MetalService {
-    private MetalRepository metalRepository;
+    private final MetalRepositoryImpl metalRepositoryImpl;
 
-    public MetalService(MetalRepository metalRepository) {
-        this.metalRepository = metalRepository;
+    @Inject
+    public MetalService(MetalRepositoryImpl metalRepositoryImpl) {
+        this.metalRepositoryImpl = metalRepositoryImpl;
     }
 
     public boolean create(String metal, double credit) {
         if (metal.isEmpty() || credit < 0) return false;
         Metal newMetal = new Metal(metal, credit);
-        metalRepository.add(newMetal);
+        metalRepositoryImpl.add(newMetal);
         return true;
     }
 }

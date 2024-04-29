@@ -8,6 +8,7 @@ import com.amaap.merchantsguide.repository.GalacticTradeRepository;
 import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
 import com.amaap.merchantsguide.service.validator.TransactionValidator;
+import com.google.inject.Inject;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class GalacticTradeService {
     private final GalacticTradeRepository transactionRepository;
     private final MetalService metalService;
 
+    @Inject
     public GalacticTradeService(GalacticTradeRepository transactionRepository, MetalService metalService) {
         this.transactionRepository = transactionRepository;
         this.metalService = metalService;
@@ -38,7 +40,7 @@ public class GalacticTradeService {
         String[] units = unit.split(" ");
         String numeral = getNumeralValue(units);
         int number = QueryProcessor.convertToNumber(numeral);
-        if(number == 0) return 0;
+        if (number == 0) return 0;
         return (double) (credits / number);
     }
 

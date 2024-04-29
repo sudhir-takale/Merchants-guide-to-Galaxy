@@ -1,14 +1,15 @@
-package com.amaap.merchantsguide.repository.db;
+package com.amaap.merchantsguide.repository.db.impl;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
 import com.amaap.merchantsguide.domain.model.entity.Metal;
 import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
+import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryDatabaseImpl implements InMemoryDatabase {
+public class FakeInMemoryDatabase implements InMemoryDatabase {
 
 
     private List<GalacticTranslation> galaxyTranslationList = new ArrayList<>();

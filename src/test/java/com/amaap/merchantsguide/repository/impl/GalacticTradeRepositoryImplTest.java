@@ -2,7 +2,7 @@ package com.amaap.merchantsguide.repository.impl;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
 import com.amaap.merchantsguide.repository.GalacticTradeRepository;
-import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
+import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 class GalacticTradeRepositoryImplTest {
 
-    GalacticTradeRepository galacticTradeRepository = new GalacticTradeRepositoryImpl(new InMemoryDatabaseImpl());
+    GalacticTradeRepository galacticTradeRepository = new GalacticTradeRepositoryImpl(new FakeInMemoryDatabase());
 
     @Test
     void shouldBeAbleToSaveGalacticTransaction() {

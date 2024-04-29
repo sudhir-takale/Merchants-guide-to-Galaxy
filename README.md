@@ -51,6 +51,12 @@ I have no idea what you are talking about<br>
 ------------------------------------------------------------------------
 Solution:
 
+### Assumptions:
+    - Query is part Galaxy Trade 
+    
+
+
+
 - Domain
     - Model
         - GalacticTransactions
@@ -58,59 +64,64 @@ Solution:
           - GalacticTransaction
           - Metal
           - Credits
+          
         - RomanTranslation(enum)
-
+      
+        - GalacticTranslations
+          - id
+          - galactic units
+          - Roman Value
+        - Metal
+          - id
+          - metal Name
+          - actual credits (one part value)
+          - 
     - Service
-        - processTransactions
-          <br>
-          <br>
+        - QueryProcessor
+          - convertToNumber
+          - printOutput
+            <br>
+            <br>
 - configuration - Object to validate the input file data
     - numerals
     - transactions
       <br>
       <br>
 - Controllers
-    - FileProcessingController
-        - processInputFile
-    - GalacticController
+    - GalacticTransactionController
+        - createTranslation
+    - GalacticTradeController
         - processTransactions
         - showTransactions
-          <br>
-          <br>
+    - MetalController
+      - createMetal
+            <br>
+            <br>
 - Services
     - FileProcessingService
     - GalacticService
       - crateTransaction
       - ProcessTransaction
       - getTransactions
-      <br>
-      <br>
+    - GalacticTranslationService
+      - getTranslation
+      - createTranslation
+    - MetalService
+      - createMetal
+      - getMetal
+        <br>
+        <br>
 - Repository
-    - FileRepository
-        - GalacticTransactionDTO
-    - GalacticTransactionRepository
-        - AddTransaction
-        - fetchTransaction
+    - MetalRepository
+    - GalacticTradeRepository
+      - dto
+        - queryString
+    - GalacticTranslationRepository
 
 ### Flow
 
-- Create A fileProcessingController
-    - processFile
 - Create a fileProcessingService
     - RedFile
     - ParseFile
     - Validate Data
     - create Objects
-- createRepository to store the data
-    - GalacticTransactionDTO
-    - GalacticQueryDTO
-- GalacticTransactionController
-- GalacticTransactionService
-    - fetchAllTransaction
-    - fetchAllQueries
-    - Process Queries
-- Process Query call to domain Service named ->
-    - QueryProcessor
-        - it has method convertToNumber
-        - ProcessQuery
-        - Shows output of query

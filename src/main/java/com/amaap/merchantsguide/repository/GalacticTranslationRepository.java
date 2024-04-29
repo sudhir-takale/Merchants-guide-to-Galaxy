@@ -1,23 +1,12 @@
 package com.amaap.merchantsguide.repository;
 
 import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
-import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 
 import java.util.List;
 
-public class GalacticTranslationRepository {
-    private InMemoryDatabase inMemoryDatabase;
+public interface GalacticTranslationRepository {
 
-    public GalacticTranslationRepository(InMemoryDatabase inMemoryDatabase) {
-        this.inMemoryDatabase = inMemoryDatabase;
-    }
+    void save(GalacticTranslation galacticTranslation);
 
-    public void save(GalacticTranslation galacticTranslation) {
-        this.inMemoryDatabase.saveTranslation(galacticTranslation);
-
-    }
-
-    public List<GalacticTranslation> getTranslation() {
-       return  this.inMemoryDatabase.getAllTranslations();
-    }
+    List<GalacticTranslation> getTranslation();
 }

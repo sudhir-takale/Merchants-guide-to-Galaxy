@@ -3,9 +3,9 @@ package com.amaap.merchantsguide.controller;
 import com.amaap.merchantsguide.controller.dto.HttpStatus;
 import com.amaap.merchantsguide.controller.dto.Response;
 import com.amaap.merchantsguide.repository.GalacticTradeRepository;
-import com.amaap.merchantsguide.repository.GalacticTranslationRepository;
-import com.amaap.merchantsguide.repository.MetalRepository;
-import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
+import com.amaap.merchantsguide.repository.GalacticTranslationRepositoryImpl;
+import com.amaap.merchantsguide.repository.MetalRepositoryImpl;
+import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.merchantsguide.repository.impl.GalacticTradeRepositoryImpl;
 import com.amaap.merchantsguide.service.GalacticTradeService;
 import com.amaap.merchantsguide.service.GalacticTranslationService;
@@ -16,13 +16,13 @@ import org.junit.jupiter.api.Test;
 
 public class GalacticTradeControllerTest {
 
-    InMemoryDatabaseImpl database = new InMemoryDatabaseImpl();
+    FakeInMemoryDatabase database = new FakeInMemoryDatabase();
     GalacticTradeRepository repository = new GalacticTradeRepositoryImpl(database);
     GalacticTradeService galacticTradeService = new GalacticTradeService(repository,
-            new MetalService(new MetalRepository(new InMemoryDatabaseImpl())));
+            new MetalService(new MetalRepositoryImpl(new FakeInMemoryDatabase())));
 
     GalacticTranslationService translationService =
-            new GalacticTranslationService(new GalacticTranslationRepository(new InMemoryDatabaseImpl()));
+            new GalacticTranslationService(new GalacticTranslationRepositoryImpl(new FakeInMemoryDatabase()));
     GalacticTradeController galacticTradeController = new GalacticTradeController(galacticTradeService);
     FileProcessingService fileProcessingService = new FileProcessingService(galacticTradeService, translationService);
 

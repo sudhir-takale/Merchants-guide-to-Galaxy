@@ -1,16 +1,5 @@
+metal_type:
+  silver
+  gold
+  iron
 
-numeral_galactic_translation:
-  glob: I
-  prok: V
-  pish: X
-  tegj: L
-
-  metal_type:
-    1: silver
-    2: gold
-    3: iron
-
-  galactic_unit:
-  1: glob glob
-  2: glob prok
-  3: pish pish

@@ -1,14 +1,14 @@
 package com.amaap.merchantsguide.controller;
 
-import com.amaap.merchantsguide.repository.GalacticTranslationRepository;
-import com.amaap.merchantsguide.repository.db.InMemoryDatabaseImpl;
+import com.amaap.merchantsguide.repository.GalacticTranslationRepositoryImpl;
+import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.merchantsguide.service.GalacticTranslationService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class GalacticTranslationControllerTest {
     GalacticTranslationController galacticTranslationController =
-            new GalacticTranslationController(new GalacticTranslationService(new GalacticTranslationRepository(new InMemoryDatabaseImpl())));
+            new GalacticTranslationController(new GalacticTranslationService(new GalacticTranslationRepositoryImpl(new FakeInMemoryDatabase())));
 
 
 
