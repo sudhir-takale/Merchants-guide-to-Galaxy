@@ -7,7 +7,7 @@ import com.amaap.merchantsguide.domain.service.QueryProcessor;
 import com.amaap.merchantsguide.repository.GalacticTradeRepository;
 import com.amaap.merchantsguide.repository.dto.GalacticQueryDto;
 import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
-import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
+import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFoundException;
 import com.amaap.merchantsguide.service.validator.TransactionValidator;
 import com.google.inject.Inject;
 
@@ -25,7 +25,7 @@ public class GalacticTradeService {
 
     public boolean createTransaction(String unit, String metal, int credits) throws InValidMetalFoundException {
         if (TransactionValidator.validateTransaction(unit, metal, credits))
-            throw new InvalidGalacticTransactionFound("Invalid " + "argument passed exception");
+            throw new InvalidGalacticTransactionFoundException("Invalid " + "argument passed exception");
 
         GalacticTrade galacticTrade = new GalacticTrade(unit, metal, credits);
         if (metal != null) {
@@ -50,11 +50,9 @@ public class GalacticTradeService {
         List<GalacticTranslation> token = getTranslations();
 
         for (String unit : metal) {
-            boolean found = false;
             for (GalacticTranslation dto : token) {
                 if (dto.getGalacticUnit().trim().equals(unit.trim())) {
                     builder.append(dto.getRomanNumeral());
-                    found = true;
                     break;
                 }
             }

@@ -8,10 +8,10 @@ import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.merchantsguide.repository.impl.GalacticTradeRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
-import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
+import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFoundException;
 import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
 import com.amaap.merchantsguide.service.io.FileProcessingService;
-import com.amaap.merchantsguide.service.io.exception.InvalidFilePathNotExist;
+import com.amaap.merchantsguide.service.io.exception.InvalidFilePathNotExistException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -63,16 +63,19 @@ class GalacticTradeServiceTest {
     @Test
     void shouldThrowExceptionWhenInvalidMetalIsPassed() {
         // act & assert
-        assertThrows(InvalidGalacticTransactionFound.class, () -> galacticTradeService.createTransaction("prok prok", "", 34));
+        assertThrows(InvalidGalacticTransactionFoundException.class,
+                () -> galacticTradeService.createTransaction("prok prok", "", 34));
 
-        assertThrows(InvalidGalacticTransactionFound.class, () -> galacticTradeService.createTransaction("", "", 34));
+        assertThrows(InvalidGalacticTransactionFoundException.class,
+                () -> galacticTradeService.createTransaction("", "", 34));
 
-        assertThrows(InvalidGalacticTransactionFound.class, () -> galacticTradeService.createTransaction("prok prok", "Silver", -34));
+        assertThrows(InvalidGalacticTransactionFoundException.class,
+                () -> galacticTradeService.createTransaction("prok prok", "Silver", -34));
     }
 
 
     @Test
-    void shouldBeAbleToProcessAllQueries() throws InvalidParameterTypeException, InvalidFilePathNotExist, IOException {
+    void shouldBeAbleToProcessAllQueries() throws InvalidParameterTypeException, InvalidFilePathNotExistException, IOException {
 
         fileProcessingService.processInputFile("D:\\Tasks\\Merchant-Guide\\src\\main\\java\\resources\\GalacticTransactions.txt");
 

@@ -12,7 +12,7 @@ import com.amaap.merchantsguide.service.GalacticTranslationService;
 import com.amaap.merchantsguide.service.MetalService;
 import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
 import com.amaap.merchantsguide.service.io.FileProcessingService;
-import com.amaap.merchantsguide.service.io.exception.InvalidFilePathNotExist;
+import com.amaap.merchantsguide.service.io.exception.InvalidFilePathNotExistException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +45,7 @@ public class GalacticTradeControllerTest {
 
 
     @Test
-    void shouldBeAbleToResolveQueries() throws  InvalidParameterTypeException, InvalidFilePathNotExist, IOException {
+    void shouldBeAbleToResolveQueries() throws  InvalidParameterTypeException, InvalidFilePathNotExistException, IOException {
         // arrange
         Response expected = new Response(HttpStatus.OK, "All queries resolved successfully");
         fileProcessingService.processInputFile("D:\\Tasks\\Merchant-Guide\\src\\main\\java\\resources\\GalacticTransactions.txt");
@@ -56,8 +56,5 @@ public class GalacticTradeControllerTest {
         // assert
         Assertions.assertEquals(expected, actual);
     }
-
-
-
 
 }

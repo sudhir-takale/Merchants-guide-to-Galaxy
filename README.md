@@ -53,6 +53,7 @@ Solution:
 
 ### Assumptions:
     - Query is part Galaxy Trade 
+    - allowing new galactic unit
 
 
 - Domain
@@ -69,57 +70,67 @@ Solution:
           - id
           - galactic units
           - Roman Value
+        
         - Metal
           - id
           - metal Name
           - actual credits (one part value)
-          - 
+          
     - Service
-        - QueryProcessor
-          - convertToNumber
-          - printOutput
+        - QueryProcessor   - it will take all queries and process it one by one and prints the result
+          - convertToNumber  - it will help to convert Numeral to integer number
+          - printOutput       - it will print the output after processing
             <br>
-            <br>
+            
+          
 - configuration - Object to validate the input file data
-    - numerals
-    - transactions
+    - validMetals
       <br>
-      <br>
+     
 - Controllers
-    - GalacticTransactionController
-        - createTranslation
-    - GalacticTradeController
-        - processTransactions
-        - showTransactions
-    - MetalController
-      - createMetal
+    - GalacticTranslationController
+        - createTranslation  - it is used to create new translation like glob is X
+        - getTranslation     - to get the translation
+      
+    - GalacticTradeController  - it will perform action related with galactic trades
+      - processTransactions     - it will take all trades and process it
+        - showTransactions      - shows all the transactions
+      
+    - MetalController   - performs actions related with metal trades
+      - createMetal     - used to create a new metal
             <br>
-            <br>
+           
+      
 - Services
     - FileProcessingService
-    - GalacticService
-      - crateTransaction
-      - ProcessTransaction
-      - getTransactions
-    - GalacticTranslationService
-      - getTranslation
-      - createTranslation
-    - MetalService
-      - createMetal
-      - getMetal
-        <br>
-        <br>
+      - fileReaderService  - it reads the input file line by line and also handle the invalid data line
+      - fileParserService  - it will parse the data validate it and crates objects
+      
+      - GalacticTradeService   - it will performs operations related with galactic service
+        - crateTransaction   - used to create a new transaction
+        - ProcessTransaction  - it will process the transactions
+        - getTransactions     - it will get all the trades done by person
+      
+    - GalacticTranslationService -  it will helps to create a translation
+      - getTranslation       - to get the translation 
+      - createTranslation   - to create a new Translation
+      
+    - MetalService  - perform operation related with metal like creating and getting and also used 
+      validation to validate the metals
+      - createMetal  - to crate a new metal
+        - getMetal   - to get the metals from the repository
+          <br>
+          
+      
 - Repository
     - MetalRepository
-    - GalacticTradeRepository
-      - dto
-        - queryString
-    - GalacticTranslationRepository
-
-### Flow
-
-- Create a fileProcessingService
-    - RedFile
-    - ParseFile
-    - Validate Data
-    - create Objects
+      - saveMetalToRepository - metals information is stored in the repository
+  
+      - GalacticTradeRepository - information related with trade i.e selling is stored in the repository
+      - saveTrade()
+        - dto
+          - queryString         - this is query which we need to process
+        
+      - GalacticTranslationRepository - stores the data related to translations
+        - saveTranslations()
+        
