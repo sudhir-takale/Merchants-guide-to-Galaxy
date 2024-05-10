@@ -10,9 +10,13 @@ import com.amaap.merchantsguide.repository.impl.GalacticTradeRepositoryImpl;
 import com.amaap.merchantsguide.service.GalacticTradeService;
 import com.amaap.merchantsguide.service.GalacticTranslationService;
 import com.amaap.merchantsguide.service.MetalService;
+import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
 import com.amaap.merchantsguide.service.io.FileProcessingService;
+import com.amaap.merchantsguide.service.io.exception.InvalidFilePathNotExist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 public class GalacticTradeControllerTest {
 
@@ -28,6 +32,7 @@ public class GalacticTradeControllerTest {
 
     @Test
     void shouldBeAbleToGetAllNewTransaction() {
+        // arrange
         Response expected = new Response(HttpStatus.OK, "Transactions has been fetched successfully");
 
         // act
@@ -39,18 +44,20 @@ public class GalacticTradeControllerTest {
     }
 
 
-//    @Test
-//    void shouldBeAbleToResolveQueries() throws InvalidParameterTypeException, InvalidFilePathNotExist, IOException {
-//        Response expected = new Response(HttpStatus.OK, "All queries resolved successfully");
-//        fileProcessingService.processInputFile("D:\\Tasks\\Merchant-Guide\\src\\main\\java\\com\\amaap\\merchantsguide\\resources" +
-//                "\\GalacticTransactions.txt");
-//
-//        // act
-//        Response actual = galacticTransactionController.processQueries();
-//
-//        // assert
-//        Assertions.assertEquals(expected, actual);
-//    }
+    @Test
+    void shouldBeAbleToResolveQueries() throws  InvalidParameterTypeException, InvalidFilePathNotExist, IOException {
+        // arrange
+        Response expected = new Response(HttpStatus.OK, "All queries resolved successfully");
+        fileProcessingService.processInputFile("D:\\Tasks\\Merchant-Guide\\src\\main\\java\\resources\\GalacticTransactions.txt");
+
+        // act
+        Response actual = galacticTradeController.processQueries();
+
+        // assert
+        Assertions.assertEquals(expected, actual);
+    }
+
+
 
 
 }

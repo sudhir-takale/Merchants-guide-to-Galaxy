@@ -2,6 +2,7 @@ package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.repository.MetalRepositoryImpl;
 import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
+import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,7 +13,7 @@ class MetalServiceTest {
     MetalService metalService = new MetalService(new MetalRepositoryImpl(new FakeInMemoryDatabase()));
 
     @Test
-    void shouldCreateMetalSuccessfully() {
+    void shouldCreateMetalSuccessfully() throws InValidMetalFoundException {
         // arrange
         String metalName = "Gold";
         int credit = 100;
@@ -25,7 +26,7 @@ class MetalServiceTest {
     }
 
     @Test
-    public void shouldNotCreateMetalIfMetalNameIsEmpty() {
+    public void shouldNotCreateMetalIfMetalNameIsEmpty() throws InValidMetalFoundException {
         // arrange
         String metalName = "";
         int credit = 100;
@@ -37,7 +38,7 @@ class MetalServiceTest {
         assertFalse(result);
     }
     @Test
-    public void shouldNotCreateMetalIfMetalCreditIsNegative(){
+    public void shouldNotCreateMetalIfMetalCreditIsNegative() throws InValidMetalFoundException {
         // arrange
         String metalName = "Silver";
         int credit = -100;

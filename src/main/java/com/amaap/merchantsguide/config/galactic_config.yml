@@ -1,5 +1,5 @@
-metal_type:
-  silver
-  gold
-  iron
+validMetals:
+  - Silver
+  - Gold
+  - Iron
 

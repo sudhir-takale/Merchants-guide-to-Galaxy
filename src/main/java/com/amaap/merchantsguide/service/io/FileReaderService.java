@@ -17,7 +17,8 @@ public class FileReaderService {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-
+            if (line.isEmpty()) continue;
+            line = line.replaceAll("\\s+", " ").trim();
             if (!fileParserService.parseInputLine(line)) return false;
         }
         return true;

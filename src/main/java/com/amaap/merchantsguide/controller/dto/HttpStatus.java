@@ -1,5 +1,5 @@
 package com.amaap.merchantsguide.controller.dto;
 
 public enum HttpStatus {
-    OK
+    BAD_REQUEST, OK
 }

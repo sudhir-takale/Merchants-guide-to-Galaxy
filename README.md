@@ -53,8 +53,6 @@ Solution:
 
 ### Assumptions:
     - Query is part Galaxy Trade 
-    
-
 
 
 - Domain

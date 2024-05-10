@@ -4,11 +4,14 @@ import com.amaap.merchantsguide.config.ConfigValidator;
 import com.amaap.merchantsguide.service.GalacticTradeService;
 import com.amaap.merchantsguide.service.GalacticTranslationService;
 import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
-import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionUnitException;
 import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
 import com.google.inject.Inject;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class FileParserService {
@@ -25,7 +28,7 @@ public class FileParserService {
     }
 
 
-    public boolean parseInputLine(String line) throws InvalidParameterTypeException {
+    public boolean parseInputLine(String line) throws InvalidParameterTypeException, IOException {
 
         if (line.matches("^\\w+\\s+is\\s+\\w+$")) {
             foundGalacticUnit(line);
@@ -55,19 +58,23 @@ public class FileParserService {
 
     }
 
-    private void foundGalacticTransaction(String line) throws InvalidParameterTypeException {
-        Map<Integer, String> metals = configValidator.getMetals();
-        Map<Integer, String> transaction = configValidator.getTransaction();
+    private void foundGalacticTransaction(String line) throws InvalidParameterTypeException, IOException {
+        Yaml yaml = new Yaml();
+        FileInputStream inputStream = new FileInputStream("D:\\Tasks\\Merchant-Guide\\src\\main\\java\\com\\amaap\\merchantsguide\\config\\galactic_config.yml");
+        Map<String, List<String>> yamlData = yaml.load(inputStream);
+        List<String> validMetals = yamlData.get("validMetals");
+        inputStream.close();
 
         String[] transactionToken = line.split(" ");
+
         String unit = transactionToken[0] + " " + transactionToken[1];
-        if (!transaction.containsValue(unit.trim()))
-            throw new InvalidGalacticTransactionFound(unit + " Invalid galactic transaction found");
-        if (!metals.containsValue(transactionToken[2]) || Integer.parseInt(transactionToken[4]) < 0)
+
+        if (!validMetals.contains(transactionToken[2]) || Integer.parseInt(transactionToken[4]) < 0)
             throw new InValidMetalFoundException(transactionToken[2] + " Invalid metal type found");
         else {
             galacticTradeService.createTransaction(unit, transactionToken[2], Integer.parseInt(transactionToken[4]));
         }
+
     }
 
     private void foundGalacticUnit(String line) throws InvalidParameterTypeException {

@@ -7,6 +7,7 @@ import com.amaap.merchantsguide.repository.MetalRepositoryImpl;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.merchantsguide.repository.impl.GalacticTradeRepositoryImpl;
+import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFound;
 import com.amaap.merchantsguide.service.exception.InvalidParameterTypeException;
 import com.amaap.merchantsguide.service.io.FileProcessingService;
@@ -30,7 +31,7 @@ class GalacticTradeServiceTest {
 
 
     @Test
-    void shouldBeAbleToCreateANewGalacticTransaction() throws InvalidGalacticTransactionFound {
+    void shouldBeAbleToCreateANewGalacticTransaction() throws InValidMetalFoundException {
         // arrange
         String unit = "glob glob";
         String metal = "Silver";
@@ -44,7 +45,7 @@ class GalacticTradeServiceTest {
     }
 
     @Test
-    void shouldBeAbleToFetchAllTransactions() throws InvalidGalacticTransactionFound {
+    void shouldBeAbleToFetchAllTransactions() throws InValidMetalFoundException {
         // arrange
         String unit = "glob glob";
         String metal = "Silver";

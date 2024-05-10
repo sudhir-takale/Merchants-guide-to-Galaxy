@@ -3,7 +3,7 @@ package com.amaap.merchantsguide.controller;
 import com.amaap.merchantsguide.service.GalacticTranslationService;
 
 public class GalacticTranslationController {
-    private GalacticTranslationService galacticTranslationService;
+    private final GalacticTranslationService galacticTranslationService;
 
     public GalacticTranslationController(GalacticTranslationService galacticTranslationService) {
         this.galacticTranslationService = galacticTranslationService;
