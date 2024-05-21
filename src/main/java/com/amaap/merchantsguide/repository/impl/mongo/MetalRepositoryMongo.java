@@ -25,9 +25,7 @@ public class MetalRepositoryMongo implements MetalRepository {
 
                         .append("metal", newMetal.getMetalName())
                         .append("credit", newMetal.getCredits())
-
         );
-
     }
 
     @Override
