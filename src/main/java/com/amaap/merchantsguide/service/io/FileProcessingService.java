@@ -21,7 +21,8 @@ public class FileProcessingService {
 
     public boolean processInputFile(String filePath) throws IOException, InvalidFilePathNotExistException, InvalidParameterTypeException {
 
-        if (FilePathValidator.validateFilePath(filePath)) throw new InvalidFilePathNotExistException("File path not valid");
+        if (FilePathValidator.validateFilePath(filePath))
+            throw new InvalidFilePathNotExistException("File path not valid");
 
         return FileReaderService.readFile(filePath, galacticTradeService, galacticTranslationService);
     }

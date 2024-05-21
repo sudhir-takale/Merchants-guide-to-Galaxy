@@ -1,15 +1,16 @@
 package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
+import com.amaap.merchantsguide.repository.GalacticTranslationRepository;
 import com.amaap.merchantsguide.repository.impl.GalacticTranslationRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFoundException;
 import com.google.inject.Inject;
 
 public class GalacticTranslationService {
-    private final GalacticTranslationRepositoryImpl translationRepository;
+    private final GalacticTranslationRepository translationRepository;
 
     @Inject
-    public GalacticTranslationService(GalacticTranslationRepositoryImpl translationRepository) {
+    public GalacticTranslationService(GalacticTranslationRepository translationRepository) {
         this.translationRepository = translationRepository;
     }
 

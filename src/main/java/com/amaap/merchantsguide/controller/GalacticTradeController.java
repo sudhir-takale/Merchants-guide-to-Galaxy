@@ -3,10 +3,12 @@ package com.amaap.merchantsguide.controller;
 import com.amaap.merchantsguide.controller.dto.HttpStatus;
 import com.amaap.merchantsguide.controller.dto.Response;
 import com.amaap.merchantsguide.service.GalacticTradeService;
+import com.google.inject.Inject;
 
 public class GalacticTradeController {
     private final GalacticTradeService galacticTradeService;
 
+    @Inject
     public GalacticTradeController(GalacticTradeService galacticTradeService) {
         this.galacticTradeService = galacticTradeService;
     }

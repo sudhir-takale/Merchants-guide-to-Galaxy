@@ -17,5 +17,6 @@ public class Main {
         GalacticTradeController galacticTradeController = injector.getInstance(GalacticTradeController.class);
         System.out.println(galacticTradeController.processQueries());
         System.out.println(galacticTradeController.fetchAllTransactions());
+
     }
 }
