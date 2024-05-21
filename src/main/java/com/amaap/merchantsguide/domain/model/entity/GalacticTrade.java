@@ -2,10 +2,10 @@ package com.amaap.merchantsguide.domain.model.entity;
 
 public class GalacticTrade {
 
+    private int transactionId;
     private final String transactionName;
     private final String metal;
     private final int credit;
-    private int transactionId;
 
     public GalacticTrade(String transactionName, String metal, int credit) {
         this.transactionName = transactionName;
