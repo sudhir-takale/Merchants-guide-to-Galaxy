@@ -2,8 +2,8 @@ package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.domain.model.entity.GalacticTrade;
 import com.amaap.merchantsguide.repository.GalacticTradeRepository;
-import com.amaap.merchantsguide.repository.GalacticTranslationRepositoryImpl;
-import com.amaap.merchantsguide.repository.MetalRepositoryImpl;
+import com.amaap.merchantsguide.repository.impl.GalacticTranslationRepositoryImpl;
+import com.amaap.merchantsguide.repository.impl.MetalRepositoryImpl;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.merchantsguide.repository.impl.GalacticTradeRepositoryImpl;

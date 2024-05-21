@@ -2,6 +2,7 @@ package com.amaap.merchantsguide.repository;
 
 import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
 import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
+import com.amaap.merchantsguide.repository.impl.GalacticTranslationRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
 package com.amaap.merchantsguide.service;
 
 import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
-import com.amaap.merchantsguide.repository.GalacticTranslationRepositoryImpl;
+import com.amaap.merchantsguide.repository.impl.GalacticTranslationRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFoundException;
 import com.google.inject.Inject;
 

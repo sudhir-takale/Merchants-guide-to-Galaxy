@@ -1,6 +1,7 @@
-package com.amaap.merchantsguide.repository;
+package com.amaap.merchantsguide.repository.impl;
 
 import com.amaap.merchantsguide.domain.model.valueobject.GalacticTranslation;
+import com.amaap.merchantsguide.repository.GalacticTranslationRepository;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.google.inject.Inject;
 

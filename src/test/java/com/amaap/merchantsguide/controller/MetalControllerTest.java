@@ -2,7 +2,7 @@ package com.amaap.merchantsguide.controller;
 
 import com.amaap.merchantsguide.controller.dto.HttpStatus;
 import com.amaap.merchantsguide.controller.dto.Response;
-import com.amaap.merchantsguide.repository.MetalRepositoryImpl;
+import com.amaap.merchantsguide.repository.impl.MetalRepositoryImpl;
 import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.merchantsguide.service.MetalService;
 import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;

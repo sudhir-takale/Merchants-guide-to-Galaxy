@@ -2,7 +2,7 @@ package com.amaap.merchantsguide.controller;
 
 import com.amaap.merchantsguide.controller.dto.HttpStatus;
 import com.amaap.merchantsguide.controller.dto.Response;
-import com.amaap.merchantsguide.repository.GalacticTranslationRepositoryImpl;
+import com.amaap.merchantsguide.repository.impl.GalacticTranslationRepositoryImpl;
 import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.merchantsguide.service.GalacticTranslationService;
 import com.amaap.merchantsguide.service.exception.InvalidGalacticTransactionFoundException;

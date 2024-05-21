@@ -1,8 +1,8 @@
 package com.amaap.merchantsguide;
 
 import com.amaap.merchantsguide.controller.GalacticTradeController;
-import com.amaap.merchantsguide.repository.GalacticTranslationRepositoryImpl;
-import com.amaap.merchantsguide.repository.MetalRepositoryImpl;
+import com.amaap.merchantsguide.repository.impl.GalacticTranslationRepositoryImpl;
+import com.amaap.merchantsguide.repository.impl.MetalRepositoryImpl;
 import com.amaap.merchantsguide.repository.db.InMemoryDatabase;
 import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.merchantsguide.repository.impl.GalacticTradeRepositoryImpl;
