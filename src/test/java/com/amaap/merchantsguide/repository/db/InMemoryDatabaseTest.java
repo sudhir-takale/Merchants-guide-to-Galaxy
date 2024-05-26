@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryDatabaseTest {
     InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
@@ -82,7 +81,7 @@ class InMemoryDatabaseTest {
         List<Metal> metals = inMemoryDatabase.getMetals();
 
         // assert
-        assertTrue(metals.size() == 1);
+        assertEquals(1, metals.size());
 
     }
 
@@ -96,7 +95,7 @@ class InMemoryDatabaseTest {
         List<GalacticQueryDto> queryList = inMemoryDatabase.getQueryList();
 
         // assert
-        assertTrue(!queryList.isEmpty());
+        assertFalse(queryList.isEmpty());
     }
 
     @Test
@@ -109,7 +108,7 @@ class InMemoryDatabaseTest {
         List<GalacticTranslation> allTranslations = inMemoryDatabase.getAllTranslations();
 
         // assert
-        assertTrue(!allTranslations.isEmpty());
+        assertFalse(allTranslations.isEmpty());
 
     }
 

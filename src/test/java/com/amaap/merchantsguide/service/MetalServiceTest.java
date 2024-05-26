@@ -1,11 +1,11 @@
 package com.amaap.merchantsguide.service;
 
-import com.amaap.merchantsguide.repository.impl.MetalRepositoryImpl;
 import com.amaap.merchantsguide.repository.db.impl.FakeInMemoryDatabase;
+import com.amaap.merchantsguide.repository.impl.MetalRepositoryImpl;
 import com.amaap.merchantsguide.service.exception.InValidMetalFoundException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MetalServiceTest {
@@ -26,27 +26,24 @@ class MetalServiceTest {
     }
 
     @Test
-    public void shouldNotCreateMetalIfMetalNameIsEmpty() throws InValidMetalFoundException {
+    public void shouldThrowExceptionIfMetalNameIsEmpty() throws InValidMetalFoundException {
         // arrange
         String metalName = "";
         int credit = 100;
 
-        // act
-        boolean result = metalService.create(metalName, credit);
+        // act & assert
+        assertThrows(InValidMetalFoundException.class, () -> metalService.create(metalName, credit));
 
-        // assert
-        assertFalse(result);
     }
+
     @Test
     public void shouldNotCreateMetalIfMetalCreditIsNegative() throws InValidMetalFoundException {
         // arrange
         String metalName = "Silver";
         int credit = -100;
 
-        // act
-        boolean result = metalService.create(metalName, credit);
+        // act & assert
+        assertThrows(InValidMetalFoundException.class, () -> metalService.create(metalName, credit));
 
-        // assert
-        assertFalse(result);
     }
 }
